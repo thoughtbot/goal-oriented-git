@@ -10,11 +10,13 @@
     * `git help`
 2. Goal: Tracking changes
     * `git init`
-    * `git add` (including `-p`)
+    * `git add`
     * `git commit`
 3. Goal: Understand what is tracked
     * `git diff`
     * `git status`
+4. Goal: Beautiful commits
+    * `git add --patch`
 
 ## 2. Using history
 
