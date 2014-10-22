@@ -17,6 +17,12 @@
 
 \part{Using history}
 
+<<[2-1-read-the-history.md]
+
+<<[2-2-refer-to-commits.md]
+
+<<[2-3-understand-a-change.md]
+
 \part{Branching}
 
 \part{Collaboration}

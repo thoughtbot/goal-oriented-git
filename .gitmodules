@@ -1,0 +1,9 @@
+[submodule "examples/2-1-read-the-history"]
+	path = examples/2-1-read-the-history
+	url = git@github.com:goal-oriented-git-examples/2-1-read-this-history.git
+[submodule "examples/2-2-refer-to-commits"]
+	path = examples/2-2-refer-to-commits
+	url = git@github.com:goal-oriented-git-examples/2-2-refer-to-commits.git
+[submodule "examples/2-3-understand-a-change"]
+	path = examples/2-3-understand-a-change
+	url = git@github.com:goal-oriented-git-examples/2-3-understand-a-change.git

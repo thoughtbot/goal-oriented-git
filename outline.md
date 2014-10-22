@@ -20,19 +20,21 @@
 
 ## 2. Using history
 
-1. Introduction
-    * Referring to commits (`gitrevisions(7)`)
-2. Goal: Read the history
-    * `git log` (including `--oneline`)
+1. Goal: Read the history
+    * `git log`
+    * `git show`
+2. Goal: Refer to commits
+    * `gitrevisions(7)`
 3. Goal: Understand a change
     * `git blame`
-    * `git show`
-    * `git checkout`
+    * `git log <range> <file>`
 4. Goal: Searching the repository
     * `git log` (including `-S`)
     * `git grep`
     * `git bisect`
-5. Goal: Undo changes
+5. Goal: Load a specific version
+    * `git checkout`
+6. Goal: Undo changes
     * `git revert`
     * `git reset` (soft and `--hard`)
 
