@@ -10,7 +10,9 @@
 \part{Getting started}
 
 <<[1-2-tracking-changes.md]
+
 <<[1-3-understanding-what-is-being-tracked.md]
+
 <<[1-4-beautiful-commits.md]
 
 \part{Using history}
