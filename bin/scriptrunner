@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'script_runner'
+
+begin
+  ScriptRunner::CLI.new.run
+rescue => e
+  $stderr.puts "scriptrunner: error: #{e.message}"
+  exit 1
+end
