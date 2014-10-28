@@ -15,8 +15,10 @@ create your first Git repository.
 The `git init` command creates a new Git repository in the directory where the
 command is run. For example:
 
-    cd projects/git-book
-    git init
+`# cd examples/1-2-tracking-changes
+`# rm -rf projects/git-book/.git
+`$ cd projects/git-book
+`$ git init
 
 This creates a new Git repository in the `projects/git-book` directory,
 essentially telling Git that from now on we want to track the changes made to
@@ -57,11 +59,13 @@ Let's say we've created a file in our `git-book` working directory called
 it to the repository. That's step one, step two is to add the file to the index
 using the `git add` command:
 
-    git add chapter1.txt
+`# cd examples/1-2-tracking-changes/projects/git-book
+`$ git add chapter1.txt
 
 And then we can create a commit using the `git commit` command:
 
-    git commit --message "First draft of chapter one"
+`# cd examples/1-2-tracking-changes/projects/git-book
+`$ git commit --message "First draft of chapter one"
 
 The commit message, passed using the `--message` argument, describes the changes
 in the commit: in this case, it adds the first draft of chapter one.
