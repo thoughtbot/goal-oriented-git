@@ -32,23 +32,13 @@ three sections:
 
 For example:
 
-    $ git status
-    # On branch master
-    # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #
-    #       new file:   chapter2.txt
-    #
-    # Changes not staged for commit:
-    #   (use "git add <file>..." to update what will be committed)
-    #   (use "git checkout -- <file>..." to discard changes in working directory)
-    #
-    #       modified:   chapter1.txt
-    #
-    # Untracked files:
-    #   (use "git add <file>..." to include in what will be committed)
-    #
-    #       chapter3.txt
+`# cd examples/1-3-understanding-what-is-being-tracked
+`# git reset --hard HEAD
+`# echo 'CHAPTER 2' > chapter2.txt
+`# git add chapter2.txt
+`# echo 'CHAPTER 3' > chapter3.txt
+`# sed -i '' 's/CHAPTER ONE/CHAPTER 1/' chapter1.txt
+`$ git status
 
 In this case, `chapter2.txt` has just been added to the index for the first time
 with `git add`, `chapter1.txt` is tracked by Git but has been modified since it
@@ -69,37 +59,27 @@ or added to the index.
 For example, here's the most recently committed version of a file called
 `chapter1.txt`:
 
-    CHAPTER ONE
-
-    This is the first chapter, where it all begins.
+`# cd examples/1-3-understanding-what-is-being-tracked
+`! git show HEAD:chapter1.txt
 
 In the working directory, we've modified `chapter1.txt` to look like this:
 
-    CHAPTER 1
-
-    This is the first chapter, where it all begins.
+`# cd examples/1-3-understanding-what-is-being-tracked
+`! cat chapter1.txt
 
 Running `git diff` shows us the change:
 
-    $ git diff
-    diff --git a/chapter1.txt b/chapter1.txt
-    index 1e41245..80a7940 100644
-    --- a/chapter1.txt
-    +++ b/chapter1.txt
-    @@ -1,3 +1,3 @@
-    -CHAPTER ONE
-    +CHAPTER 1
-
-     This is the first chapter, where it all begins.
+`# cd examples/1-3-understanding-what-is-being-tracked
+`$ git diff
 
 The first section establishes some context: which versions are being compared,
 which files, and which lines the changes appear on. More important than the
 context are the changes themselves:
 
-    -CHAPTER ONE
-    +CHAPTER 1
-
-     This is the first chapter, where it all begins.
+`# cd examples/1-3-understanding-what-is-being-tracked
+`! git diff | sed -e '1,/@@/d'
+`# git clean -f
+`# git reset --hard HEAD
 
 Lines beginning with a `-` indicate a line that has been removed, and lines
 beginning with a `+` indicate a line that has been added. In this case a line
