@@ -28,17 +28,9 @@ Let's look at an example: I've made some unrelated changes within the same file,
 so I want to add them as two commits. `git diff` tells me I have the following
 changes:
 
-    $ git diff
-    diff --git a/chapter1.txt b/chapter1.txt
-    index 8f6f18e..d119536 100644
-    --- a/chapter1.txt
-    +++ b/chapter1.txt
-    @@ -1,3 +1,3 @@
-    -The quick brown fxo jumped over the lazy dog.
-    +The quick brown fox jumped over the lazy dog.
-
-    -The dog was not best pleased.
-    +The dog was not best pleased, and barked angrily.
+`# cd examples/1-4-beautiful-commits
+`# git reset 3acba2e
+`$ git diff
 
 On the first line, I've corrected a typing error by changing `fxo` to `fox`, and
 then I've added some additional material about the dog's reaction to the fox.
@@ -46,18 +38,8 @@ These changes aren't related, so we should create two different commits. `git
 add --patch` will allow us to add the correction to the index, without the new
 content:
 
-    $ git add --patch chapter1.txt
-    diff --git a/chapter1.txt b/chapter1.txt
-    index 8f6f18e..d119536 100644
-    --- a/chapter1.txt
-    +++ b/chapter1.txt
-    @@ -1,3 +1,3 @@
-    -The quick brown fxo jumped over the lazy dog.
-    +The quick brown fox jumped over the lazy dog.
-
-    -The dog was not best pleased.
-    +The dog was not best pleased, and barked angrily.
-    Stage this hunk [y,n,q,a,d,/,s,e,?]?
+`# cd examples/1-4-beautiful-commits
+`! git-add-patch-demo q
 
 Git will show the differences -- using the familiar style of `git diff` -- one
 piece at a time, and ask me what I want to do with each piece. In this case,
@@ -66,57 +48,33 @@ related and showing me a single piece. The output ends with a question: `Stage
 this hunk [y,n,q,a,d,/,s,e,?]?`. There are a lot of options, but thankfully
 entering `?` will explain the other options:
 
-    Stage this hunk [y,n,q,a,d,/,s,e,?]? ?
-    y - stage this hunk
-    n - do not stage this hunk
-    q - quit; do not stage this hunk nor any of the remaining ones
-    a - stage this hunk and all later hunks in the file
-    d - do not stage this hunk nor any of the later hunks in the file
-    g - select a hunk to go to
-    / - search for a hunk matching the given regex
-    j - leave this hunk undecided, see next undecided hunk
-    J - leave this hunk undecided, see next hunk
-    k - leave this hunk undecided, see previous undecided hunk
-    K - leave this hunk undecided, see previous hunk
-    s - split the current hunk into smaller hunks
-    e - manually edit the current hunk
-    ? - print help
+`# cd examples/1-4-beautiful-commits
+`! git-add-patch-demo ? q | sed -n '/Stage/,/@@/p' | sed '/@@/,$d'
 
 Most of the time we can answer with `y` to add the change to the index, or `n`
 to skip it and move on to the next change. In this case, though, I need to use
 `s` to tell Git that even though these changes are close to each other they
 should be split up and added to the index separately:
 
-    Stage this hunk [y,n,q,a,d,/,s,e,?]? s
-    Split into 2 hunks.
-    @@ -1,2 +1,2 @@
-    -The quick brown fxo jumped over the lazy dog.
-    +The quick brown fox jumped over the lazy dog.
-
-    Stage this hunk [y,n,q,a,d,/,j,J,g,e,?]?
+`# cd examples/1-4-beautiful-commits
+`! git-add-patch-demo s q | sed -n '/Stage/,/Stage/p'
 
 This change is just the correction on the first line, so I can stage it in the
-index using `y`. Once it's staged, Git will show me the next change:
-
-    Stage this hunk [y,n,q,a,d,/,j,J,g,e,?]? y
-    @@ -2,2 +2,2 @@
-
-    -The dog was not best pleased.
-    +The dog was not best pleased, and barked angrily.
-    Stage this hunk [y,n,q,a,d,/,K,g,e,?]?
-
+index using `y`. Once it's staged, Git will show me the next change.
 Since this change isn't related to the one I've already added to the index, I
 don't want to include it in the same commit, so I can skip it with `n`:
 
-    Stage this hunk [y,n,q,a,d,/,K,g,e,?]? n
-    $
+`# cd examples/1-4-beautiful-commits
+`! git-add-patch-demo s y n | sed -n '/ y$/,/ n$/p'
 
 This was the last change, so `git add --patch` exits, and I can commit the fix
 and then the additional content:
 
-    $ git commit --message "Fix typing error"
-    $ git add chapter1.txt
-    $ git commit --message "Add information about the dog's reaction"
+`# cd examples/1-4-beautiful-commits
+`$ git commit --message "Fix typing error"
+`$ git add chapter1.txt
+`$ git commit --message "Add information about the dog's reaction"
+`# git reset --hard original
 
 I almost always use the `--patch` option when I'm adding files to the index,
 even when I think all of the changes will end up as a single commit: It gives me

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+command="git add --patch"
+
+expectations=""
+for key in "$@"; do
+    expectations="$expectations expect ]? {send $key\\\n};"
+done
+
+expect_command="spawn -noecho $command;$expectations expect eof"
+
+echo "$ $command"
+echo "$expect_command" | expect - | sed 's/$//' | sed 's/\? q$/? /'

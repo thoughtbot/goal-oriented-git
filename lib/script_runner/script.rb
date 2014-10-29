@@ -26,12 +26,13 @@ module ScriptRunner
 
     def generated_output
       stdout_str, _, _ = Open3.capture3("#{script_file.path} 2>&1")
-      stdout_str.lines
+      stdout_str.gsub("\r\n", "\n").lines
     end
 
     def script_file
       @script_file ||= Tempfile.new('script').tap do |file|
-        file << "#!/bin/sh\n\n"
+        file.puts %Q{#!/bin/sh\n}
+        file.puts %Q{PATH="$PATH:#{bin_path}"}
         file << script
         file.close
         File.chmod(0744, file.path)
@@ -59,6 +60,10 @@ module ScriptRunner
       else
         "#{command} > /dev/null"
       end
+    end
+
+    def bin_path
+      File.expand_path('../../../bin', __FILE__)
     end
   end
 end
