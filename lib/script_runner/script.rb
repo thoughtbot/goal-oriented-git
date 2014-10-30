@@ -1,4 +1,5 @@
 require 'open3'
+require 'shellwords'
 require 'tempfile'
 
 module ScriptRunner
@@ -42,7 +43,8 @@ module ScriptRunner
         match = Transformer::Regex::SCRIPT.match(line)
         case match[:type]
         when Transformer::ECHO_TYPE
-          "echo '$ #{match[:command]}'\n#{match[:command]}\n"
+          command_to_echo = Shellwords.escape("$ #{match[:command]}")
+          "echo #{command_to_echo}\n#{match[:command]}\n"
         when Transformer::OUTPUT_TYPE
           "#{match[:command]}\n"
         when Transformer::SILENT_TYPE
