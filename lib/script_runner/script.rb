@@ -25,7 +25,7 @@ module ScriptRunner
     attr_reader :input_lines
 
     def generated_output
-      stdout_str, _, _ = Open3.capture3(script_file.path)
+      stdout_str, _, _ = Open3.capture3("#{script_file.path} 2>&1")
       stdout_str.lines
     end
 
