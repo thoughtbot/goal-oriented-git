@@ -3,11 +3,13 @@
 
 \clearpage
 
-<<[introduction.md]
+<<[0-introduction.md]
 
 \mainmatter
 
 \part{Getting started}
+
+<<[1-1-introduction.md]
 
 <<[1-2-tracking-changes.md]
 
@@ -23,6 +25,32 @@
 
 <<[2-3-understand-a-change.md]
 
+<<[2-4-searching-the-repository.md]
+
+<<[2-5-load-a-specific-version.md]
+
+<<[2-6-undo-changes.md]
+
 \part{Branching}
 
+<<[3-1-introduction.md]
+
+<<[3-2-create-a-branch.md]
+
+<<[3-3-compare-branches.md]
+
+<<[3-4-combine-branches.md]
+
+<<[3-5-move-branches.md]
+
+<<[3-6-delete-branches.md]
+
 \part{Collaboration}
+
+<<[4-1-introduction.md]
+
+<<[4-2-add-a-remote.md]
+
+<<[4-3-publish-changes.md]
+
+<<[4-4-retrieve-changes.md]
