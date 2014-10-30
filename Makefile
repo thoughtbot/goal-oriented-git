@@ -1,10 +1,13 @@
 SRCS=$(wildcard src/*.md)
 CHAPTERS=$(patsubst src/%,book/%,$(SRCS))
 
-.PHONY: clean
+.PHONY: clean stats
 
 build: $(CHAPTERS) .bundle
 	bin/stubs/paperback build
+
+stats: $(CHAPTERS) .bundle
+	bin/stubs/paperback stats
 
 .bundle: Gemfile
 	bundle --path .bundle --binstubs bin/stubs
