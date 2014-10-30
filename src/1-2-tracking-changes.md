@@ -71,8 +71,8 @@ The commit message, passed using the `--message` argument, describes the changes
 in the commit: in this case, it adds the first draft of chapter one.
 
 By committing, we've drawn a line in the sand. Whatever changes we make to
-chapter one in future, we'll always be able to get back to the version we just
-committed.
+chapter one in future, we'll always be able to get back to the
+<dfn>revision</dfn> we just committed.
 
 Now that we've included it in a commit, the file `chapter1.txt` will be
 <dfn>tracked</dfn> by Git: if we make any changes to the file in future, Git

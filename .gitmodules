@@ -13,3 +13,6 @@
 [submodule "examples/2-3-understand-a-change"]
 	path = examples/2-3-understand-a-change
 	url = git@github.com:goal-oriented-git-examples/2-3-understand-a-change.git
+[submodule "examples/2-4-searching-the-repository"]
+	path = example/2-4-searching-the-repository
+	url = git@github.com:goal-oriented-git-examples/2-4-searching-the-repository.git

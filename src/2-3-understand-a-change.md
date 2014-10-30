@@ -46,7 +46,7 @@ maybe those list items should never have been removed in the first place.
 To find out where the list items went, we can turn to another command we've used
 before: `git log`.
 
-## Filtering `git log`
+## Filtering `git log` by commit and file name
 
 We've used `git log` to look at all of the commits in our project. In this case,
 we want something more specific. The `git log` command accepts a range of
