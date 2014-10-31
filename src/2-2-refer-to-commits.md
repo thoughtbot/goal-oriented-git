@@ -1,8 +1,7 @@
 # Goal: Refer to commits
 
 Commit identifiers can be quite cumbersome to use: they're long, complex, and
-not very memorable. Fortunately, there are some better options for day-to-day
-use.
+not very memorable. Fortunately, there are some better options.
 
 Let's imagine the following Git history, and see if there are better ways of
 referring to the commits:
@@ -18,10 +17,13 @@ show` with the full identifier:
 `# cd examples/2-2-refer-to-commits
 `$ git show e420911b9d16d0fd75a12a71202673ae32fc933a
 
-It's also possible to use the beginning of the identifier, as long as you use
-enough of it that it's unique within the repository. In practice, this usually
-means that we can use the first 6 or 7 characters of the identifier without any
-problems:
+In the previous chapter we saw that the `git log --oneline` command only prints
+the start of the commit identifier. It does this because it's possible to use
+the beginning of the identifier to identify a commit, as long as you use enough
+of it to be unique among all of the commit identifiers in the repository. In
+practice, this usually means that we can use the first 6 or 7 characters of the
+identifier without any problems, evan in a long running project with thousands
+of commits.
 
 `# cd examples/2-2-refer-to-commits
 `$ git show e420911
