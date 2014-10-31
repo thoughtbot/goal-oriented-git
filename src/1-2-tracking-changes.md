@@ -4,7 +4,7 @@ If you can see and understand the incremental changes to your files that
 led to their current state, then you have a better chance of fully understanding
 the project you are working on, fixing problems that arise, and collaborating
 successfully with others. In order to unlock the riches promised by a
-comprehensive history, we have to first begin to build that history, one change
+comprehensive history, we have to first build that history, one change
 at a time.
 
 By now, you should have installed Git on your system, and so you are ready to
@@ -22,7 +22,7 @@ command is run. For example:
 
 This creates a new Git repository in the `projects/git-book` directory,
 essentially telling Git that from now on we want to track the changes made to
-some, or all, of the files in that directory. Since we haven't told Git exactly
+files in that directory. Since we haven't told Git exactly
 which files to track yet, the repository is empty; this is true even if the
 `projects/git-book` directory isn't empty.
 
@@ -65,7 +65,7 @@ using the `git add` command:
 And then we can create a commit using the `git commit` command:
 
 `# cd examples/1-2-tracking-changes/projects/git-book
-`$ git commit --message "First draft of chapter one"
+`$ git commit --message "Add first draft of chapter one"
 
 The commit message, passed using the `--message` argument, describes the changes
 in the commit: in this case, it adds the first draft of chapter one.
@@ -73,6 +73,12 @@ in the commit: in this case, it adds the first draft of chapter one.
 By committing, we've drawn a line in the sand. Whatever changes we make to
 chapter one in future, we'll always be able to get back to the version we just
 committed.
+
+Now that we've included it in a commit, the file `chapter1.txt` will be
+<dfn>tracked</dfn> by Git: if we make any changes to the file in future, Git
+will notice that it has changed and needs to be committed again. Practically,
+this means that we can run `git add` without a file name to add future changes
+to `chapter1.txt` (and any other tracked files) to the index.
 
 ## Summary
 
