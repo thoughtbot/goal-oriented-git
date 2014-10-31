@@ -1,33 +1,24 @@
 # Goal: Understand what is being tracked
 
-So far, we've made simple commits with a few files, but in a complex project
+So far, we've made simple commits with just one file, but in a complex project
 there could be dozens or even hundreds of files. How do we know if they've been
-changed since they were last committed, or if they've ever been committed at
-all?
+changed since they were last committed, or if they're even tracked by Git?
 
-Git provides a number of commands for comparing the state of the repository,
-index, and working directory, so we can stay up to date with what's changed.
+Git provides a number of commands for comparing the state of the repository, the
+index, and the working directory, so we can stay up to date with what's changed.
 
 ## The `git status` command
 
-The `git status` command will tell us the status of the files in our working
-directory. This command isn't concerned with the details of exactly what's
-changed in each file, just which files have been changed and therefore could be
-committed.
+The `git status` command will tell us the status of our files. It lists all of
+the changed or untracked files in the working directory, split into the
+following groups:
 
-`git status` won't mention any files that haven't been changed since they were
-last committed. If none of your files have changed, `git status` will let you
-know that you have `nothing to commit, working directory clean`.
-
-When there are changes that could be committed, the output is broken down into
-three sections:
-
-1. **Changes to be committed**, that is files which have already been added to
+1. **Changes to be committed**: files which have already been added to
    the index with `git add` and will be included the next time we run `git
    commit`.
-2. **Changes not staged for commit**, that is files which have been changed in
+2. **Changes not staged for commit**: files which have been changed in
    the working directory, but not added to the index.
-3. **Untracked files**, that is files which have never been committed and
+3. **Untracked files**: files which have never been committed and
    therefore aren't tracked by Git.
 
 For example:
@@ -44,13 +35,26 @@ In this case, `chapter2.txt` has just been added to the index for the first time
 with `git add`, `chapter1.txt` is tracked by Git but has been modified since it
 was last committed, and `chapter3.txt` isn't tracked by Git yet.
 
+`git status` won't mention any files that haven't been changed since they were
+last committed. If none of your files have changed, `git status` will let you
+know that you have clean working directory:
+
+`# cd examples/1-3-understanding-what-is-being-tracked
+`# git reset --hard HEAD
+`# git clean --force
+`$ git status
+
+ `git status` isn't concerned with the details of exactly what's
+changed in each file, just which files have been changed and therefore could be
+committed.
+
 ## The `git diff` command
 
 Now we know which files in our working directory have changed, it would be good
 to see the details of those changes. The `git diff` command provides this.
 
 If you've used the Unix `diff` utility then the output of `git diff` might look
-familiar. The difference is that while `diff` shows the difference between
+familiar, but while `diff` shows the difference between
 files, `git diff` shows the difference between versions of the same file.
 
 Without any arguments, `git diff` shows all changes that haven't been committed
@@ -60,6 +64,11 @@ For example, here's the most recently committed version of a file called
 `chapter1.txt`:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
+`# git reset --hard HEAD
+`# echo 'CHAPTER 2' > chapter2.txt
+`# git add chapter2.txt
+`# echo 'CHAPTER 3' > chapter3.txt
+`# sed -i '' 's/CHAPTER ONE/CHAPTER 1/' chapter1.txt
 `! git show HEAD:chapter1.txt
 
 In the working directory, we've modified `chapter1.txt` to look like this:
@@ -72,9 +81,10 @@ Running `git diff` shows us the change:
 `# cd examples/1-3-understanding-what-is-being-tracked
 `$ git diff
 
-The first section establishes some context: which versions are being compared,
-which files, and which lines the changes appear on. More important than the
-context are the changes themselves:
+The first section gives some information about the change Git is showing: which
+versions are being compared, and on which lines of which files there are
+changes. Other than the file's name, this is more useful to machines than
+humans, and I usually don't read it. More important are the changes themselves:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
 `! git diff | sed -e '1,/@@/d'
@@ -86,13 +96,16 @@ beginning with a `+` indicate a line that has been added. In this case a line
 has been changed: the old version of the line was removed, and the new version
 was added.
 
+Lines beginning with a space (i.e. lines that lack both `+` and `-`) are
+unchanged, but are shown to give the context of the change.
+
 ### The `git diff --staged` command
 
-If `git diff` without any arguments shows us the changes that haven't been
-staged in the index yet, then `git diff --staged` shows us the changes that have
-been staged but haven't yet been committed. In other words, `git diff --staged`
-shows you the changes that would be included in the commit, if you were to run
-`git commit` right now.
+Remember that without any arguments `git diff` shows us the changes that haven't
+been staged in the index yet. `git diff --staged` shows us the changes that
+*have* been staged, but haven't yet been committed. In other words, `git diff
+--staged` shows you the changes that would be included in the commit, if you
+were to run `git commit` right now.
 
 It can be useful to run `git diff --staged` before `git commit` as a final check
 that the right changes have been staged in the index.
