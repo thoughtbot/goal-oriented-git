@@ -23,18 +23,28 @@ identifies the commit:
 `# cd examples/2-1-read-the-history
 `! git log -n 1 | head -n 1
 
-These identifiers are very important. Many of the ways of using our Git history
-involve referring to specific commits, and we often do that using these unique
-identifiers.
+These identifiers are very important. Many of the ways we can use our projects'
+Git history involve referring to specific commits, and we often do that using
+these unique identifiers.
 
-As a concrete example, `git log` has shown us the commit messages, but what if
-we want to see the changes contained in one of these commits?
+Often the full output of `git log` is more than we need: a short summary of each
+commit would be enough, without authors, dates, or even the full commit message.
+The `git log` command accepts many options to customise the format of the
+output; one of the most useful is `--oneline`, which only outputs the first line
+of the commit message, and the first few characters of the unique identifier:
+
+`# cd examples/2-1-read-the-history
+`! git log --oneline
+
+Running `git help log` will give you comprehensive documentation on the other
+ways you can customise the output of `git log`.
 
 ## The `git show` command
 
-The `git show` command will show you the contents of a specific commit, which
-means we need to tell it which commit to show; this is the first of many
-examples of a place where we can use a commit's unique identifier.
+While `git log` gives us an overview of many commits, the `git show` command
+will show the contents of a specific commit. We need to tell it which commit to
+show; this is the first of many examples of a place where we can use a commit's
+unique identifier.
 
 `# cd examples/2-1-read-the-history
 `$ git show c7d5d6876da96f8aff9b08416119ff0178d776cf
@@ -47,4 +57,5 @@ diff`.
 ## Summary
 
 * Use `git log` to see a list of commits.
+* Use `git log --oneline` to see just the first line of the commit messages.
 * Use `git show <identifier>` to see the contents of a specific commit.
