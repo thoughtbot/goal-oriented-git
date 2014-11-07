@@ -1,0 +1,3 @@
+# Goal-Oriented Git
+
+STUB

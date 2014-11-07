@@ -1,0 +1,5 @@
+# Collaboration
+
+## Introduction
+
+STUB

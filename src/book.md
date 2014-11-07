@@ -3,54 +3,54 @@
 
 \clearpage
 
-<<[0-introduction.md]
+<<[README.md]
 
 \mainmatter
 
 \part{Getting started}
 
-<<[1-1-introduction.md]
+<<[getting_started/README.md]
 
-<<[1-2-tracking-changes.md]
+<<[getting_started/1-2-tracking-changes.md]
 
-<<[1-3-understanding-what-is-being-tracked.md]
+<<[getting_started/1-3-understanding-what-is-being-tracked.md]
 
-<<[1-4-beautiful-commits.md]
+<<[getting_started/1-4-beautiful-commits.md]
 
 \part{Using history}
 
-<<[2-1-read-the-history.md]
+<<[using_history/README.md]
 
-<<[2-2-refer-to-commits.md]
+<<[using_history/2-2-refer-to-commits.md]
 
-<<[2-3-understand-a-change.md]
+<<[using_history/2-3-understand-a-change.md]
 
-<<[2-4-searching-the-repository.md]
+<<[using_history/2-4-searching-the-repository.md]
 
-<<[2-5-load-a-specific-version.md]
+<<[using_history/2-5-load-a-specific-version.md]
 
-<<[2-6-undo-changes.md]
+<<[using_history/2-6-undo-changes.md]
 
 \part{Branching}
 
-<<[3-1-introduction.md]
+<<[branching/README.md]
 
-<<[3-2-create-a-branch.md]
+<<[branching/3-2-create-a-branch.md]
 
-<<[3-3-compare-branches.md]
+<<[branching/3-3-compare-branches.md]
 
-<<[3-4-combine-branches.md]
+<<[branching/3-4-combine-branches.md]
 
-<<[3-5-move-branches.md]
+<<[branching/3-5-move-branches.md]
 
-<<[3-6-delete-branches.md]
+<<[branching/3-6-delete-branches.md]
 
 \part{Collaboration}
 
-<<[4-1-introduction.md]
+<<[collaboration/README.md]
 
-<<[4-2-add-a-remote.md]
+<<[collaboration/4-2-add-a-remote.md]
 
-<<[4-3-publish-changes.md]
+<<[collaboration/4-3-publish-changes.md]
 
-<<[4-4-retrieve-changes.md]
+<<[collaboration/4-4-retrieve-changes.md]
