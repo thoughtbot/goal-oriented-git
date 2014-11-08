@@ -46,6 +46,7 @@ module ScriptRunner
         case match[:type]
         when Transformer::ECHO_TYPE
           command_to_echo = Shellwords.escape("$ #{match[:command]}")
+          command_to_echo = command_to_echo.gsub("\\$", "$")
           "echo #{command_to_echo}\n#{match[:command]}\n"
         when Transformer::OUTPUT_TYPE
           "#{match[:command]}\n"
