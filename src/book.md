@@ -27,9 +27,7 @@
 
 <<[2-4-searching-the-repository.md]
 
-<<[2-5-load-a-specific-version.md]
-
-<<[2-6-undo-changes.md]
+<<[2-5-undo-changes.md]
 
 \part{Branching}
 

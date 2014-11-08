@@ -32,9 +32,7 @@
     * `git log` (including `-S`)
     * `git grep`
     * `git bisect`
-5. Goal: Load a specific version
-    * `git checkout`
-6. Goal: Undo changes
+5. Goal: Undo changes
     * `git revert`
     * `git reset` (soft and `--hard`)
 
