@@ -76,9 +76,7 @@ chapter one in future, we'll always be able to get back to the
 
 Now that we've included it in a commit, the file `chapter1.txt` will be
 <dfn>tracked</dfn> by Git: if we make any changes to the file in future, Git
-will notice that it has changed and needs to be committed again. Practically,
-this means that we can run `git add` without a file name to add future changes
-to `chapter1.txt` (and any other tracked files) to the index.
+will notice that it has changed and needs to be committed again.
 
 ## Summary
 
