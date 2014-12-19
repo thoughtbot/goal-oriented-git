@@ -85,7 +85,7 @@ GEM
     inflecto (0.0.2)
     ipaddress (0.8.0)
     json (1.8.1)
-    kindlegen (2.9.3)
+    kindlegen (2.9.4)
     mime-types (2.4.3)
     mini_portile (0.6.0)
     minitest (5.4.2)
