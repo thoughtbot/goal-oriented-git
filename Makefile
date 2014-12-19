@@ -12,8 +12,12 @@ stats: $(CHAPTERS) .bundle
 .bundle: Gemfile
 	bundle --path .bundle --binstubs bin/stubs
 
-book/%.md: src/%.md bin/scriptrunner lib/script_runner
+book/%.md: src/%.md bin/scriptrunner lib/script_runner examples
 	bin/scriptrunner $< > $@
+
+examples: .gitmodules
+	git submodule init
+	git submodule update
 
 clean:
 	rm -rf build
