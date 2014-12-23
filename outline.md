@@ -17,6 +17,7 @@
     * `git status`
 4. Goal: Make beautiful commits
     * `git add --patch`
+5. Goal: Write beautiful commit messages
 
 ## 2. Using history
 

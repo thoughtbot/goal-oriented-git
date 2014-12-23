@@ -27,13 +27,21 @@ These identifiers are very important. Many of the ways we can use our projects'
 Git history involve referring to specific commits, and we often do that using
 these unique identifiers.
 
-Often the full output of `git log` is more than we need: a short summary of each
-commit would be enough, without authors, dates, or even the full commit message.
+### The `--oneline` option
+
+In the last chapter we discussed detailed commit messages, which can often get
+very long. If every commit message runs to dozens of lines, the full output of
+`git log` can be a little overwhelming, and difficult to quickly scan for a
+particular commit.
+
 The `git log` command accepts many options to customise the format of the
 output; one of the most useful is `--oneline`, which only outputs the first line
 of the commit message, and the first few characters of the unique identifier:
 
 `$ git log --oneline
+
+Remember that the first line of the commit message should be a short summary of
+the commit, so this is a great way to get an overview of recent changes.
 
 Running `git help log` will give you comprehensive documentation on the other
 ways you can customise the output of `git log`.

@@ -17,6 +17,8 @@
 
 <<[1-4-beautiful-commits.md]
 
+<<[1-5-beautiful-commit-messages.md]
+
 \part{Using history}
 
 <<[2-1-read-the-history.md]
