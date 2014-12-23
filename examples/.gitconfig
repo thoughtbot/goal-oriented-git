@@ -1,6 +1,6 @@
 [user]
-  name = George Brocklehurst
-  email = george@georgebrock.com
+	name = George Brocklehurst
+	email = george@georgebrock.com
 [core]
   editor = /usr/bin/true
 [color]

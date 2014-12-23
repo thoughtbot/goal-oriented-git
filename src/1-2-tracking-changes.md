@@ -8,7 +8,8 @@ comprehensive history, we have to first build that history, one change
 at a time.
 
 By now, you should have installed Git on your system, and so you are ready to
-create your first Git repository.
+create your first Git <dfn>repository</dfn>, the place where Git keeps track of
+all of the changes for a given project.
 
 ## The `git init` command
 

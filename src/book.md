@@ -3,13 +3,13 @@
 
 \clearpage
 
-<<[0-introduction.md]
+<<[0-about-this-book.md]
 
 \mainmatter
 
 \part{Getting started}
 
-<<[1-1-introduction.md]
+<<[1-1-get-set-up.md]
 
 <<[1-2-tracking-changes.md]
 
