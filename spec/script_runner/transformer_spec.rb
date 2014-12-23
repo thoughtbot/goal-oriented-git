@@ -26,5 +26,17 @@ describe ScriptRunner::Transformer do
         Second script output.
       OUTPUT
     end
+
+    it 'matches indented scripts' do
+      input = %Q(    `! echo 'First script.'\n)
+      allow(ScriptRunner::Script).to receive(:run).with([]).and_return([])
+      allow(ScriptRunner::Script).to receive(:run).
+        with([%Q(    `! echo 'First script.'\n)]).
+        and_return(["First script output.\n"])
+
+      output = described_class.new(input).transform
+
+      expect(output).to eq "First script output.\n"
+    end
   end
 end

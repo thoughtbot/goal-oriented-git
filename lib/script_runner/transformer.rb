@@ -7,6 +7,7 @@ module ScriptRunner
     module Regex
       SCRIPT = %r{
         \A
+        (?<indentation>\s*)
         `
         (?<type>[#{ECHO_TYPE}#{OUTPUT_TYPE}#{SILENT_TYPE}])
         \s+

@@ -23,5 +23,17 @@ describe ScriptRunner::Script do
         ]
       end
     end
+
+    context "with an indented script" do
+      it "uses indented output instead of code fencing" do
+        output = described_class.run([
+          %Q(    `! echo "Hello world"\n),
+        ])
+
+        expect(output).to eq [
+          %Q(        Hello world\n)
+        ]
+      end
+    end
   end
 end

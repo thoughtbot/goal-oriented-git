@@ -14,7 +14,7 @@ module ScriptRunner
 
     def run
       if input_lines.any?
-        ["```\n", generated_output, "```\n"].flatten
+        indented_output
       else
         []
       end
@@ -23,6 +23,14 @@ module ScriptRunner
     private
 
     attr_reader :input_lines
+
+    def indented_output
+      if indent.length > 0
+        generated_output.map { |line| "    #{indent}#{line}" }
+      else
+        ["```\n", generated_output, "```\n"].flatten
+      end
+    end
 
     def generated_output
       stdout_str, _, _ = Open3.capture3("#{script_file.path} 2>&1")
@@ -70,6 +78,11 @@ module ScriptRunner
 
     def home_path
       File.expand_path('../../../examples', __FILE__)
+    end
+
+    def indent
+      match = Transformer::Regex::SCRIPT.match(input_lines.first)
+      match[:indentation]
     end
   end
 end
