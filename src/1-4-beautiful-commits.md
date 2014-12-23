@@ -40,7 +40,7 @@ in turn, and decide if we want to add it to the index.
 `# cd examples/1-4-beautiful-commits
 `! git-add-patch-demo q
 
-Git will show the changes -- using the familiar style of `git diff` -- one at a
+Git will show the changes---using the familiar style of `git diff`---one at a
 time, and asks me what I want to do with each <dfn>hunk</dfn> with the question
 `Stage this hunk [y,n,q,a,d,/,s,e,?]?`. Most of the time we can answer with `y`
 to add the change to the index, or `n` to ignore it for now and move on to the

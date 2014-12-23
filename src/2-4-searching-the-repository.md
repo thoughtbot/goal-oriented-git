@@ -42,8 +42,8 @@ commits it was part of, I could have narrowed down the search even further.
 You can think of filtering the `git log` as searching in time: Given its
 knowledge of the history of your project, you're asking Git to tell you about
 times when certain kinds of changes were made. It's also useful to be able to
-search in space: given a fixed point in time -- in Git's terminology, a specific
-revision of the project -- where does a certain word or phrase appear in the
+search in space: given a fixed point in time---in Git's terminology, a specific
+revision of the project---where does a certain word or phrase appear in the
 project's tracked files?
 
 ## The `git grep` command
@@ -60,7 +60,7 @@ the working directory. We can use `git grep`:
 
 This tells me that Alice is currently only mentioned once, in the file
 `chapter1.txt`. I know that the commit `3ba3f98` removed some mentions of
-Alice--we just used the `git log -S` command to find it--and I want to find out
+Alice---we just used the `git log -S` command to find it---and I want to find out
 how often she was mentioned before that commit.
 
 If you've read the chapter on how to "Refer to commits", you'll know that if we

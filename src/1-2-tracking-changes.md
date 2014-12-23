@@ -42,9 +42,9 @@ The individual changes that make up the history of our project are called
 <dfn>commits</dfn>. We commit changes to the Git repository in the same way we might
 commit something to memory; once it's committed we won't lose it.
 
-Each commit consists of a set of changes -- like adding a new file,
+Each commit consists of a set of changes---like adding a new file,
 changing the contents of a file, deleting a file, or changing the properties of
-the file in some way -- and a <dfn>commit message</dfn> that describes the changes.
+the file in some way---and a <dfn>commit message</dfn> that describes the changes.
 
 Git provides a staging area called the <dfn>index</dfn>, where we build up a set of
 changes before committing them to the repository. We'll come back to why the
