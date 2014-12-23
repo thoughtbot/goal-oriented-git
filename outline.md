@@ -8,14 +8,14 @@
     * Installing git
     * `git config`
     * `git help`
-2. Goal: Tracking changes
+2. Goal: Track changes
     * `git init`
     * `git add`
     * `git commit`
 3. Goal: Understand what is tracked
     * `git diff`
     * `git status`
-4. Goal: Beautiful commits
+4. Goal: Make beautiful commits
     * `git add --patch`
 
 ## 2. Using history
@@ -28,7 +28,7 @@
 3. Goal: Understand a change
     * `git blame`
     * `git log <range> <file>`
-4. Goal: Searching the repository
+4. Goal: Search the repository
     * `git log` (including `-S`)
     * `git grep`
     * `git bisect`

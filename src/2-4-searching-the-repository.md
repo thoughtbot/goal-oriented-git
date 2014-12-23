@@ -1,4 +1,4 @@
-# Goal: Searching the repository
+# Goal: Search the repository
 
 Git provides some powerful search tools which let us search through the files
 Git is tracking and the commits we've made in the past.

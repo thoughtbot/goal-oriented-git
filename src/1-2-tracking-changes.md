@@ -1,4 +1,4 @@
-# Goal: Tracking changes
+# Goal: Track changes
 
 If you can see and understand the incremental changes to your files that
 led to their current state, then you have a better chance of fully understanding

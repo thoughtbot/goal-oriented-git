@@ -1,4 +1,4 @@
-# Goal: Beautiful commits
+# Goal: Make beautiful commits
 
 A good commit should contain a set of related changes, with a description of why
 those changes were made. Much of the power of tracking history is lost if we
