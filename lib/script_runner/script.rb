@@ -33,6 +33,7 @@ module ScriptRunner
       @script_file ||= Tempfile.new('script').tap do |file|
         file.puts %Q{#!/bin/sh\n}
         file.puts %Q{PATH="$PATH:#{bin_path}"}
+        file.puts %Q{HOME="#{home_path}"}
         file << script
         file.close
         File.chmod(0744, file.path)
@@ -64,6 +65,10 @@ module ScriptRunner
 
     def bin_path
       File.expand_path('../../../bin', __FILE__)
+    end
+
+    def home_path
+      File.expand_path('../../../examples', __FILE__)
     end
   end
 end
