@@ -1,2 +1,4 @@
 /build/
 /book/*.md
+/.bundle/
+/bin/stubs/
