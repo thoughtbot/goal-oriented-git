@@ -16,9 +16,10 @@ contain unformatted text as opposed to images or things like
 ## Using the command line
 
 Everything covered in this book will be done from the command line. While there
-are various graphical interfaces for Git, the command line interface is
-powerful, flexible, and works on every platform, and it allows us to take things
-step-by-step so we can really understand what's happening.
+are various applications that provide graphical interfaces for Git, the command
+line interface is powerful, flexible, and works on every platform. Issuing
+commands, one-by-one, forces us to take things step-by-step so we can really
+understand what's happening.
 
 If you're not familiar with using command line tools, then there are a few terms
 you'll need to know. Here's a typical Git command:
@@ -59,7 +60,7 @@ Before we begin, you'll need to install Git and get it set up:
     successfully. If you see a message along the lines of `command not found`,
     then Git isn't correctly installed yet.
 3.  When Git is tracking changes to our files, it needs to know who made those
-    changes---we'll see why this is important when we get into Git's
+    changes---we'll see why this is important when we explore Git's
     collaborative features in Part 4.
 
     To identify yourself, and therefore the changes you track with Git, you

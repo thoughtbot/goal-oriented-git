@@ -4,6 +4,14 @@ So far, we've made simple commits with just one file, but in a complex project
 there could be dozens or even hundreds of files. How do we know if they've been
 changed since they were last committed, or if they're even tracked by Git?
 
+In the last chapter we defined three important locations:
+
+1. The working directory, where we keep and work on the current version of our
+   project's files.
+2. The index, where we build up a set of changes ready to commit.
+3. The repository, where Git stores the history of our project as a series of
+   commits.
+
 Git provides a number of commands for comparing the state of the repository, the
 index, and the working directory, so we can stay up to date with what's changed.
 
@@ -60,8 +68,7 @@ files, `git diff` shows the difference between versions of the same file.
 Without any arguments, `git diff` shows all changes that haven't been committed
 or added to the index.
 
-For example, here's the most recently committed version of a file called
-`chapter1.txt`:
+For example, here's what `chapter1.txt` the list time it was committed:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
 `# git reset --hard HEAD
@@ -71,12 +78,13 @@ For example, here's the most recently committed version of a file called
 `# sed -i '' 's/CHAPTER ONE/CHAPTER 1/' chapter1.txt
 `! git show HEAD:chapter1.txt
 
-In the working directory, we've modified `chapter1.txt` to look like this:
+Since that commit, we've modified `chapter1.txt` in the working directory to
+look like this:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
 `! cat chapter1.txt
 
-Running `git diff` shows us the change:
+Running `git diff` shows us exactly what has changed:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
 `$ git diff
@@ -84,7 +92,8 @@ Running `git diff` shows us the change:
 The first section gives some information about the change Git is showing: which
 versions are being compared, and on which lines of which files there are
 changes. Other than the file's name, this is more useful to machines than
-humans, and I usually don't read it. More important are the changes themselves:
+humans, and I usually don't read it carefully. More important are the changes
+themselves:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
 `! git diff | sed -e '1,/@@/d'
@@ -96,7 +105,7 @@ beginning with a `+` indicate a line that has been added. In this case a line
 has been changed: the old version of the line was removed, and the new version
 was added.
 
-Lines beginning with a space (i.e. lines that lack both `+` and `-`) are
+Lines beginning with a space---lines that lack both `+` and `-`---are
 unchanged, but are shown to give the context of the change.
 
 ### The `git diff --staged` command

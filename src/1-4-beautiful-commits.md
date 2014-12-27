@@ -59,6 +59,7 @@ can treat them differently:
 `# cd examples/1-4-beautiful-commits
 `! git-add-patch-demo s q | sed -n '/Stage/,/Stage/p'
 
+Git splits the change into two hunks, and shows me the first of them.
 This change is just the correction on the first line, so I can stage it in the
 index using `y`. Once it's staged, Git will show me the next change.
 Since this change isn't related to the one I've already added to the index, I
