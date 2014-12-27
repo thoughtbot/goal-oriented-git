@@ -78,7 +78,11 @@ in the commit: in this case, it adds the first draft of chapter one.
 
 By committing, we've drawn a line in the sand. Whatever changes we make to
 chapter one in future, we'll always be able to get back to this
-<dfn>revision</dfn> of the file.
+<dfn>revision</dfn> of the file. Even though a commit only contains the changes
+made to a file since it was last committed, we can think of a commit as
+representing a particular revision of our project, since Git is able to use all
+of the commits up to that point to reconstruct the revision of the project that
+existed when that commit was made.
 
 Now that we've included it in a commit, the file `chapter1.txt` will be
 <dfn>tracked</dfn> by Git: if we make any changes to the file in future, Git
