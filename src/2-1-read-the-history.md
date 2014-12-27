@@ -1,6 +1,7 @@
 # Goal: Read the history
 
-Now that we've recorded some history, we get to use it.
+Now that we've made some commits, we can begin to use them to explore the
+history of our project.
 
 You'll often want to view your whole commit history. It can be a great way of
 refreshing your memory about what you were working on, or seeing what others

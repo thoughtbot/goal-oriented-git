@@ -1,5 +1,9 @@
 # Goal: Understand a change
 
+Now that we've learnt how to look at the whole history, and a variety of ways to
+refer to a specific commit, we're ready to start asking more demanding questions
+of our Git repository.
+
 It can often be the case in a long running project that we come across something
 in one of our files that doesn't quite make sense. Using the project's Git
 history to see where something came from can help to make it more clear. Git can
@@ -77,6 +81,10 @@ Finally we have the full context of this confusing file. It started out as a
 list, but a couple of items were removed because they were contradictory, which
 left the surrounding content in a confusing state. Now that we have the full
 story, we can confidently fix the problem.
+
+Not every investigation will follow these steps, but if you understand the
+commands we've used here you should be able to track down the source of all
+kinds of problems.
 
 ## Summary
 

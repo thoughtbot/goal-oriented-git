@@ -1,15 +1,15 @@
 # Goal: Search the repository
 
-Git provides some powerful search tools which let us search through the files
-Git is tracking and the commits we've made in the past.
-
-## Filtering `git log` by content
-
 In the last chapter, we saw how to filter the output of `git log` to only show
 us commits in a certain range, or commits that contain changes to certain files,
-so we could see what changes had been made. This time we want to start from the
+so we could see what changes had been made. In this chapter we'll start from the
 other side: we know the change we're interested in, but we don't know when or
 where it happened.
+
+Git provides some powerful search tools which let us search through the files
+it is tracking and the commits we've made in the past.
+
+## Filtering `git log` by content
 
 Let's pretend I'm writing a novel, which has the following Git history:
 

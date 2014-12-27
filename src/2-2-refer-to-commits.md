@@ -1,10 +1,14 @@
 # Goal: Refer to commits
 
-Commit identifiers can be quite cumbersome to use: they're long, complex, and
-not very memorable. Fortunately, there are some better options.
+In the last chapter we learnt how to use the `git log` command to find a
+commit's identifier, which we could use with the `git show` command to view the
+contents of that commit.
 
-Let's imagine the following Git history, and see if there are better ways of
-referring to the commits:
+Commit identifiers can be quite cumbersome to use: they're long, complex, and
+not very memorable. Fortunately, Git provides a range of alternatives.
+
+Let's imagine the following Git history, and see how we can refer to the commits
+without using the long-winded commit identifiers:
 
 `# cd examples/2-2-refer-to-commits
 `$ git log
