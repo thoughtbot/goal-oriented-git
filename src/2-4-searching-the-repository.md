@@ -23,7 +23,8 @@ character called Alice.
 
 There are a few commit messages that mention removing content, but by filtering
 the commit log to only show commits which contain changes that add or remove the
-word "Alice", I can narrow down my search.  We do this using the `-S` option:
+word "Alice", I can narrow down my search.  We do this using `git log`'s `-S`
+option:
 
 `# cd examples/2-4-searching-the-repository
 `$ git log --oneline -S Alice
@@ -69,7 +70,7 @@ that commit. In this case, we're interested in the revision before `3ba3f98`, so
 we can use `3ba3f98~1`.
 
 The `git grep` command can take a commit as a second argument, which tells it to
-search that particular revision of our project:
+search the particular revision of our project represented by that commit:
 
 `# cd examples/2-4-searching-the-repository
 `$ git grep Alice 3ba3f98~1

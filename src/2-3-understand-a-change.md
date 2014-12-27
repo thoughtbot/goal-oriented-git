@@ -43,9 +43,9 @@ the full change:
 
 This is a clue on the road to solving this mystery: we now know that the
 ambiguous section started as a list, but a couple of items were subsequently
-removed. It's a good start, but we still don't know why the list was
-subsequently altered. Maybe the correct fix is to rephrase the content, but
-maybe those list items should never have been removed in the first place.
+removed. It's a good start, but we still don't know why the list was altered.
+Maybe the correct fix is to rephrase the content, but maybe those list items
+should never have been removed in the first place.
 
 To find out where the list items went, we can turn to another command we've used
 before: `git log`.
@@ -60,11 +60,11 @@ commits and a file path as arguments, which we can use to only see commits that:
 2. contain changes to the file `chapter1.txt`.
 
 The most common way to refer to a range of commits is `first..last`, where
-`first` and `last` are both commit identifiers, or one of the other ways we've
-seen of referring to a commit. Git also allows us to omit the end of the range,
-assuming when we do so that we mean the most recent commit. In our case, we want
-to see everything after commit `61966bf`, which introduced the list, so we can
-use the range `61966bf..`.
+`first` and `last` both refer to commits, using their identifiers, or one of the
+other methods we've seen of identifying a commit. Git also allows us to omit
+the end of the range, assuming when we do so that we mean it to end with the
+most recent commit. In our case, we want to see everything after commit
+`61966bf`, which introduced the list, so we can use the range `61966bf..`.
 
 Putting this together with the file path `chapter1.txt`, we get this command:
 

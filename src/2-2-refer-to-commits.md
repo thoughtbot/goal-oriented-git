@@ -26,7 +26,7 @@ the start of the commit identifier. It does this because it's possible to use
 the beginning of the identifier to identify a commit, as long as you use enough
 of it to be unique among all of the commit identifiers in the repository. In
 practice, this usually means that we can use the first 6 or 7 characters of the
-identifier without any problems, evan in a long running project with thousands
+identifier without any problems, even in a long running project with thousands
 of commits.
 
 `# cd examples/2-2-refer-to-commits
@@ -42,10 +42,15 @@ will let you know that you've provided an ambiguous argument:
 
 Each commit in our Git repository has a <dfn>parent commit</dfn>: the
 commit that immediately preceded it. If we know the identifier of a commit, we
-can tell Git to give us its parent commit using a `~` suffix. For example:
+can tell Git to give us its parent commit using a `~1` suffix. For example:
 
 `# cd examples/2-2-refer-to-commits
 `$ git show e420911~1
+
+By increasing the number after the `~` we can follow the parent relationships
+back through the project's history:
+
+`# cd examples/2-2-refer-to-commits
 `$ git show e420911~2
 
 ## Using the commit message
