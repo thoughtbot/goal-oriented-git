@@ -18,13 +18,17 @@ more arguments for the `git log` command.
 
 We'll continue using the book example from the previous chapter: there were a
 few commits on the `master` branch, and the we created a `chapter-2` branch, and
-the history diverged into commits tracking work on a new chapter on the
-`chapter-2` branch, and some new editing commits back on the `master` branch.
+the history diverged into a commit tracking work on a new chapter on the
+`chapter-2` branch, and a new editing commits back on the `master` branch.
 
 Using the `git log` arguments we've already learnt, we looked at the history of
 each branch individually:
 
-    TODO: Example (branch; log; checkout; log)
+`# cd examples/3-3-compare-branches
+`$ git checkout master
+`$ git log --oneline
+`$ git checkout chapter-2
+`$ git log --oneline
 
 ### The `--all` argument
 
@@ -33,7 +37,8 @@ the commits at once, without having to switch branches and compare the output of
 multiple logs. The conveniently named `--log` argument will make `git log` do
 this for us:
 
-    TODO: Example (git log --oneline --all)
+`# cd examples/3-3-compare-branches
+`$ git log --oneline --all
 
 ### The `--graph` argument
 
@@ -42,7 +47,8 @@ commit is part of which branch. Passing the `--graph` argument to `git log`
 fixes this; it causes Git to draw a visual representation of the branching
 structure in the left hand margin:
 
-    TODO: Example (git log --oneline --all --graph)
+`# cd examples/3-3-compare-branches
+`$ git log --oneline --all --graph
 
 ### The `--decorate` argument
 
@@ -51,7 +57,8 @@ Which branch is which? If we pass the `--decorate` argument to `git log`, then
 Git will decorate the commit at the tip of each branch with the name of the
 branch:
 
-    TODO: Example (git log --oneline --all --graph --decorate)
+`# cd examples/3-3-compare-branches
+`$ git log --oneline --all --graph --decorate
 
 Notice that one commit is also decorated with the label `HEAD`. In the chapter
 on "referring to commits" we said that `HEAD` is the current revision of the
@@ -68,7 +75,8 @@ The `git show-branch` command takes a list of branch names as arguments, and
 will show all of the commits on each of those branches, but only as far back as
 the point where they diverged:
 
-    TODO: Example (git show-branch master chapter-2)
+`# cd examples/3-3-compare-branches
+`$ git show-branch master chapter-2
 
 The output of this command can be a little hard to interpret, so let's break it
 down into pieces.
@@ -78,23 +86,26 @@ on each. The staggered symbols on the left are column headings: in the list of
 commits below we can tell which branches they belong to by looking at which of
 the first two columns contain a symbol.
 
-    TODO: Example (git show-branch master chapter-2, header section)
+`# cd examples/3-3-compare-branches
+`! git show-branch master chapter-2 | head -n 3
 
-This is followed by a list of commits. These commits are on `master`, indicated
-by a `+` symbol in the first column:
+This is followed by a list of commits. This commit is only on the `chapter-2`
+branch, indicated by the `*` symbol in the second column:
 
-    TODO: Example (commits from master)
+`# cd examples/3-3-compare-branches
+`! git show-branch master chapter-2 | tail -n 3 | grep -E '^ \*'
 
-These commits are on the `chapter-2` branch, indicated by the `*` symbol in the
-second column:
+This commit is only on `master`, indicated by a `+` symbol in the first column:
 
-    TODO: Example (commits from chapter-2)
+`# cd examples/3-3-compare-branches
+`! git show-branch master chapter-2 | tail -n 3 | grep -E '^\+ '
 
 And finally this commit---the common ancestor of both branches, the point where
 they diverged---is present on both branches, indicated by `+*` in the first two
 columns:
 
-    TODO: Example (common ancestor)
+`# cd examples/3-3-compare-branches
+`! git show-branch master chapter-2 | tail -n 1
 
 ## Summary
 
