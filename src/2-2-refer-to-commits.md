@@ -49,6 +49,23 @@ the parent commit:
 
 `$ git show e420911~2
 
+## The most recent commit
+
+As we build up our project, it's often useful to be able to refer to "the commit
+I just made".
+
+Git uses the name `HEAD` to refer to the current revision of the project, which
+for now we can think of as the most recent commit---its meaning is slightly more
+subtle, but we'll come back to it in section three when we look at branching.
+
+`# cd examples/2-2-refer-to-commits
+`$ git show HEAD
+
+`HEAD` can be very useful when combined with relative commit references:
+
+`# cd examples/2-2-refer-to-commits
+`$ git show HEAD~1
+
 ## Using the commit message
 
 These techniques are all great if you know the commit's identifier, or at least
@@ -77,5 +94,7 @@ afraid to explore the documentation.
 
 * Use abbreviated commit identifiers.
 * Use relative commit references, e.g. `e420911~2`.
+* The current revision---usually the latest commit---can be referred to as
+  `HEAD`.
 * Refer to commits using their message, e.g. `:/Second`.
 * Check `git help revisions` for more.
