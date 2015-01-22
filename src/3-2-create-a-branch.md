@@ -66,7 +66,7 @@ book's editor on the `master` branch:
 
 `# cd examples/3-2-create-a-branch
 `$ git checkout master
-`# touch chapter1.txt
+`# echo "An addition" >> chapter1.txt
 `$ git add chapter1.txt
 `$ git commit --message "Incorporate editor's feedback into chapter 1"
 
@@ -74,7 +74,7 @@ Next, let's commit the first draft of chapter two on the `chapter-2` branch:
 
 `# cd examples/3-2-create-a-branch
 `$ git checkout chapter-2
-`# touch chapter2.txt
+`# echo "The second chapter" > chapter2.txt
 `$ git add chapter2.txt
 `$ git commit --message "First draft of chapter 2"
 
@@ -88,6 +88,7 @@ Now, when we run `git log` on each branch we see different commits:
 `# git checkout master
 `# git reset --hard HEAD~1
 `# git branch -D chapter-2
+`# git clean -f
 
 Notice that the branches share the same history, up to the point where we
 created the `chapter-2` branch.
