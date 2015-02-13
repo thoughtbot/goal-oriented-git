@@ -84,7 +84,7 @@ look like this:
 `# cd examples/1-3-understanding-what-is-being-tracked
 `! cat chapter1.txt
 
-Running `git diff` shows us exactly what has changed:
+Running `git diff` shows us exactly what the differences are:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
 `$ git diff
