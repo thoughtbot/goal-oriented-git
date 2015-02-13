@@ -6,7 +6,7 @@
 	url = git@github.com:goal-oriented-git-examples/1-4-beautiful-commits.git
 [submodule "examples/2-1-read-the-history"]
 	path = examples/2-1-read-the-history
-	url = git@github.com:goal-oriented-git-examples/2-1-read-this-history.git
+	url = git@github.com:goal-oriented-git-examples/2-1-read-the-history.git
 [submodule "examples/2-2-refer-to-commits"]
 	path = examples/2-2-refer-to-commits
 	url = git@github.com:goal-oriented-git-examples/2-2-refer-to-commits.git
