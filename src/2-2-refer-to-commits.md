@@ -48,7 +48,8 @@ can tell Git to give us its parent commit using a `~1` suffix. For example:
 `$ git show e420911~1
 
 By increasing the number after the `~` we can follow the parent relationships
-back through the project's history:
+back through the project's history. For example, `~2` will give us the parent of
+the parent commit:
 
 `# cd examples/2-2-refer-to-commits
 `$ git show e420911~2
