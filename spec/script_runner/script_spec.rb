@@ -35,5 +35,20 @@ describe ScriptRunner::Script do
         ]
       end
     end
+
+    context "with a script that outputs a path" do
+      it "fakes a more readable path" do
+        examples_path = File.expand_path("../../../examples", __FILE__)
+        output = described_class.run([
+          %Q(`! echo "#{examples_path}/some-chapter/example"),
+        ])
+
+        expect(output).to eq [
+          %Q(```\n),
+          %Q(/home/george/example\n),
+          %Q(```\n),
+        ]
+      end
+    end
   end
 end

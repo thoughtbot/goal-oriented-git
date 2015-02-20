@@ -26,9 +26,17 @@ module ScriptRunner
 
     def indented_output
       if indent.length > 0
-        generated_output.map { |line| "    #{indent}#{line}" }
+        sanitized_output.map { |line| "    #{indent}#{line}" }
       else
-        ["```\n", generated_output, "```\n"].flatten
+        ["```\n", sanitized_output, "```\n"].flatten
+      end
+    end
+
+    def sanitized_output
+      examples_root = File.expand_path("../../../examples", __FILE__)
+      example_path_matcher = %r(#{examples_root}/[^/]+)
+      generated_output.map do |line|
+        line.gsub(example_path_matcher, "/home/george")
       end
     end
 
