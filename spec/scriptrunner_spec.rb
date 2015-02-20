@@ -19,7 +19,7 @@ describe "scriptrunner command line tool" do
       # Chapter one
 
       ```
-      $ echo "$GREETING world"
+      $ echo "Hello world"
       Hello world
       ```
     OUTPUT

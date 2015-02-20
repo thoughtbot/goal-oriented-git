@@ -17,7 +17,7 @@ describe ScriptRunner::Script do
 
         expect(output).to eq [
           %Q(```\n),
-          %Q($ echo "$greeting world"\n),
+          %Q($ echo "Hello world"\n),
           %Q(Hello world\n),
           %Q(```\n),
         ]
