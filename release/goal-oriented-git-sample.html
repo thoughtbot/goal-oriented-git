@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="George Brocklehurst">
+  <title>Goal-Oriented Git</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="data:text/css,%2A%20%7B%0A%20%20%2Dmoz%2Dbox%2Dsizing%3A%20border%2Dbox%3B%0A%20%20%2Dwebkit%2Dbox%2Dsizing%3A%20border%2Dbox%3B%0A%20%20box%2Dsizing%3A%20border%2Dbox%3B%20%7D%0A%0Abody%20%7B%0A%20%20font%2Dsize%3A%201em%3B%0A%20%20height%3A%20100%25%3B%0A%20%20margin%3A%200%20auto%3B%0A%20%20max%2Dwidth%3A%2054em%3B%0A%20%20padding%3A%200%201em%204%2E5em%3B%20%7D%0A%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%20600px%29%20%7B%0A%20%20%20%20body%20%7B%0A%20%20%20%20%20%20padding%3A%200%204em%204%2E5em%3B%20%7D%20%7D%0A%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%20700px%29%20%7B%0A%20%20%20%20body%20%7B%0A%20%20%20%20%20%20font%2Dsize%3A%201%2E125em%3B%20%7D%20%7D%0A%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%20800px%29%20%7B%0A%20%20%20%20body%20%7B%0A%20%20%20%20%20%20padding%3A%200%206em%204%2E5em%3B%20%7D%20%7D%0A%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%20880px%29%20%7B%0A%20%20%20%20body%20%7B%0A%20%20%20%20%20%20padding%3A%200%208em%204%2E5em%3B%20%7D%20%7D%0A%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%20940px%29%20%7B%0A%20%20%20%20body%20%7B%0A%20%20%20%20%20%20padding%3A%200%2010em%204%2E5em%3B%20%7D%20%7D%0A%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%201800px%29%20%7B%0A%20%20%20%20body%20%7B%0A%20%20%20%20%20%20font%2Dsize%3A%201%2E375em%3B%20%7D%20%7D%0A%0Anav%20%7B%0A%20%20border%2Dbottom%3A%201px%20dashed%20%23dddddd%3B%0A%20%20border%2Dtop%3A%201px%20dashed%20%23dddddd%3B%0A%20%20padding%3A%201%2E5em%200%3B%0A%20%20margin%3A%201%2E5em%200%3B%20%7D%0A%20%20nav%20%3E%20ul%20%3E%20li%20%3E%20a%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%20%7D%0A%0Aheader%20%7B%0A%20%20padding%3A%204%2E5em%200%3B%20%7D%0A%0Abody%20%7B%0A%20%20%2Dwebkit%2Dfont%2Dsmoothing%3A%20antialiased%3B%0A%20%20color%3A%20%23444444%3B%0A%20%20font%2Dfamily%3A%20%22proxima%2Dnova%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20line%2Dheight%3A%201%2E5em%3B%20%7D%0A%0Ah1%2C%20h2%2C%20h3%2C%20h4%2C%20h5%2C%20h6%20%7B%0A%20%20color%3A%20%23222222%3B%0A%20%20font%2Dfamily%3A%20%22proxima%2Dnova%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20line%2Dheight%3A%201%2E25em%3B%0A%20%20margin%3A%201%2E5em%200%200%2E375em%3B%0A%20%20text%2Drendering%3A%20optimizeLegibility%3B%20%7D%0A%20%20h1%20%3E%20a%2C%20h2%20%3E%20a%2C%20h3%20%3E%20a%2C%20h4%20%3E%20a%2C%20h5%20%3E%20a%2C%20h6%20%3E%20a%20%7B%0A%20%20%20%20color%3A%20%23222222%3B%20%7D%0A%0Ah1%20%7B%0A%20%20margin%3A%203em%200%200%2E375em%3B%0A%20%20font%2Dsize%3A%201%2E75em%3B%20%7D%0A%20%20h1%20%3E%20a%20%7B%0A%20%20%20%20color%3A%20%23c32f34%3B%20%7D%0A%20%20%20%20h1%20%3E%20a%3Ahover%2C%20h1%20%3E%20a%3Afocus%20%7B%0A%20%20%20%20%20%20color%3A%20%23222222%3B%20%7D%0A%20%20h1%2Etitle%20%7B%0A%20%20%20%20font%2Dsize%3A%203em%3B%0A%20%20%20%20font%2Dweight%3A%20900%3B%0A%20%20%20%20line%2Dheight%3A%201%3B%0A%20%20%20%20margin%3A%200%200%20%2E125em%3B%20%7D%0A%20%20%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%20600px%29%20%7B%0A%20%20%20%20%20%20h1%2Etitle%20%7B%0A%20%20%20%20%20%20%20%20font%2Dsize%3A%204em%3B%20%7D%20%7D%0A%0Ah2%20%7B%0A%20%20font%2Dsize%3A%201em%3B%0A%20%20letter%2Dspacing%3A%201px%3B%0A%20%20text%2Dtransform%3A%20uppercase%3B%20%7D%0A%20%20h2%2Eauthor%20%7B%0A%20%20%20%20color%3A%20%23999999%3B%0A%20%20%20%20float%3A%20left%3B%0A%20%20%20%20font%2Dsize%3A%201em%3B%0A%20%20%20%20font%2Dweight%3A%20200%3B%0A%20%20%20%20margin%3A%200%3B%0A%20%20%20%20text%2Dtransform%3A%20none%3B%20%7D%0A%20%20%20%20%40media%20screen%20and%20%28min%2Dwidth%3A%20600px%29%20%7B%0A%20%20%20%20%20%20h2%2Eauthor%20%7B%0A%20%20%20%20%20%20%20%20font%2Dsize%3A%201%2E25em%3B%20%7D%20%7D%0A%20%20%20%20h2%2Eauthor%3Anot%28%3Alast%2Dchild%29%20%7B%0A%20%20%20%20%20%20margin%2Dright%3A%201em%3B%20%7D%0A%0Ah3%20%7B%0A%20%20font%2Dsize%3A%201em%3B%20%7D%0A%0Ah4%20%7B%0A%20%20font%2Dsize%3A%201%2E5em%3B%20%7D%0A%0Ah5%20%7B%0A%20%20font%2Dsize%3A%201%2E25em%3B%20%7D%0A%0Ah6%20%7B%0A%20%20font%2Dsize%3A%201em%3B%20%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%200%200%2E75em%3B%20%7D%0A%0Aa%20%7B%0A%20%20%2Dmoz%2Dtransition%3A%20all%200%2E15s%20ease%2Dout%200%3B%0A%20%20%2Dwebkit%2Dtransition%3A%20all%200%2E15s%20ease%2Dout%200%3B%0A%20%20color%3A%20%23477dca%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%20%20transition%3A%20all%200%2E15s%20ease%2Dout%200%3B%20%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%232c5999%3B%20%7D%0A%20%20a%3Aactive%2C%20a%3Afocus%20%7B%0A%20%20%20%20color%3A%20%232c5999%3B%0A%20%20%20%20outline%3A%20none%3B%20%7D%0A%0Ahr%20%7B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23dddddd%3B%0A%20%20margin%3A%201%2E5em%200%3B%20%7D%0A%0Aimg%20%7B%0A%20%20margin%3A%200%3B%0A%20%20max%2Dwidth%3A%20100%25%3B%20%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20inconsolata%2C%20%22Bitstream%20Vera%20Sans%20Mono%22%2C%20Consolas%2C%20Courier%2C%20monospace%3B%0A%20%20font%2Dsize%3A%20%2E875em%3B%0A%20%20white%2Dspace%3A%20pre%3B%0A%20%20word%2Dwrap%3A%20break%2Dword%3B%20%7D%0A%0Apre%20%7B%0A%20%20background%3A%20%23f7f7f7%3B%0A%20%20border%3A%201px%20solid%20%23dddddd%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%20%20overflow%2Dx%3A%20scroll%3B%0A%20%20padding%3A%20%2E5rem%201rem%3B%0A%20%20white%2Dspace%3A%20pre%3B%0A%20%20word%2Dwrap%3A%20normal%3B%20%7D%0A%20%20pre%20code%20%7B%0A%20%20%20%20word%2Dwrap%3A%20normal%3B%20%7D%0A%0Ablockquote%20%7B%0A%20%20border%2Dleft%3A%202px%20solid%20%23dddddd%3B%0A%20%20color%3A%20%236a6a6a%3B%0A%20%20margin%3A%201%2E5em%200%3B%0A%20%20padding%2Dleft%3A%200%2E75em%3B%20%7D%0A" rel="stylesheet">
+  <script type="text/javascript">
+    (function() {
+      var config = {
+        kitId: 'bgd6ksj',
+        scriptTimeout: 3000
+      };
+      var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/(\s|^)wf-loading(\s|$)/g," ");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script"),d=false;tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(d||a&&a!="complete"&&a!="loaded")return;d=true;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+    })();
+  </script>
+</head>
+<body>
+<header>
+<h1 class="title">Goal-Oriented Git</h1>
+<h2 class="author">George Brocklehurst</h2>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#about-this-book">About this book</a></li>
+<li><a href="#goal-get-set-up">Goal: Get set up</a><ul>
+<li><a href="#what-is-git">What is Git?</a></li>
+<li><a href="#using-the-command-line">Using the command line</a></li>
+<li><a href="#installing-and-configuring-git">Installing and configuring Git</a></li>
+</ul></li>
+<li><a href="#goal-track-changes">Goal: Track changes</a><ul>
+<li><a href="#the-git-init-command">The <code>git init</code> command</a></li>
+<li><a href="#the-git-add-and-git-commit-commands">The <code>git add</code> and <code>git commit</code> commands</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul></li>
+<li><a href="#goal-understand-what-is-being-tracked">Goal: Understand what is being tracked</a><ul>
+<li><a href="#the-git-status-command">The <code>git status</code> command</a></li>
+<li><a href="#the-git-diff-command">The <code>git diff</code> command</a><ul>
+<li><a href="#the-git-diff---staged-command">The <code>git diff --staged</code> command</a></li>
+</ul></li>
+<li><a href="#summary-1">Summary</a></li>
+</ul></li>
+<li><a href="#goal-make-beautiful-commits">Goal: Make beautiful commits</a><ul>
+<li><a href="#the-git-add---patch-command">The <code>git add --patch</code> command</a></li>
+<li><a href="#summary-2">Summary</a></li>
+</ul></li>
+</ul>
+</nav>
+<p></p>
+<section id="about-this-book" class="level1">
+<h1>About this book</h1>
+<p>If you want to learn how to use Git without worrying too much about what's going on under the hood, then this book is for you.</p>
+<p>Every chapter will take something that Git can do for you---from tracking changes, to searching your files, to collaborating with others---and explain practically how to achieve that goal. We won't cover everything Git can do, but we won't just stick to the basics either: the goal of this book is to teach you a working set of Git commands that can get you through most day-to-day situations.</p>
+<p>If you're learning Git for the first time, I'd recommend reading through in order: When we look at a particular goal, I'll assume knowledge of commands that were covered in earlier chapters.</p>
+<p></p>
+<p></p>
+</section>
+<section id="goal-get-set-up" class="level1">
+<h1>Goal: Get set up</h1>
+<section id="what-is-git" class="level2">
+<h2>What is Git?</h2>
+<p>Git is a <dfn>version control system</dfn>. When you work on a project---whether it's a piece of software, a Web site, a book, or anything else that goes through many revisions---using version control lets you track the changes that you make, return to previous versions, try alternative ideas, and seamlessly merge your own work with the work of others.</p>
+<p>Git can track any kind of files, but it's best suited to <dfn>plain text files</dfn>. If you're not familiar with the term, these are files that just contain unformatted text as opposed to images or things like <abbr title="Portable Document Format">PDF</abbr>.</p>
+</section>
+<section id="using-the-command-line" class="level2">
+<h2>Using the command line</h2>
+<p>Everything covered in this book will be done from the command line. While there are various applications that provide graphical interfaces for Git, the command line interface is powerful, flexible, and works on every platform. Issuing commands, one-by-one, forces us to take things step-by-step so we can really understand what's happening.</p>
+<p>If you're not familiar with using command line tools, then there are a few terms you'll need to know. Here's a typical Git command:</p>
+<pre><code>git commit --message &quot;My first commit&quot;</code></pre>
+<p>We'll cover what it does later, but for now let's name its component parts:</p>
+<ul>
+<li><code>git</code> is the <dfn>command</dfn>: it's the name of the program we want to run.</li>
+<li><code>commit</code> is the <dfn>sub-command</dfn>: it tells Git what we want it to do. Not all command line interfaces use sub-commands, but since Git uses them for almost everything, in the context of this book we can just think of <code>git commit</code> as the command.</li>
+<li><code>--message</code> and <code>&quot;My first commit&quot;</code> are both <dfn>arguments</dfn>: they are passed to the command to further nuance its behaviour. Arguments often come in pairs, where we tell Git what option we want to use---in this case <code>--message</code>---and then a value for that option---<code>&quot;My first commit&quot;</code>.</li>
+</ul>
+</section>
+<section id="installing-and-configuring-git" class="level2">
+<h2>Installing and configuring Git</h2>
+<p>Before we begin, you'll need to install Git and get it set up:</p>
+<ol type="1">
+<li>Go to the Git downloads page, and follow the instructions for your operating system: <a href="http://git-scm.com/downloads">http://git-scm.com/downloads</a></li>
+<li><p>Make sure you can run Git commands from the command line. If you're on Mac OS X you can use the Terminal.app application; if you're on Windows there's an application called <i>Git Bash</i> that comes with Git.</p>
+<p>The following command should tell you what version of Git you have installed:</p>
+<pre><code>$ git --version
+git version 2.2.1</code></pre>
+<p>As with all of the examples in this book, the <code>$</code> at the beginning of the line indicates that this is a command; you shouldn't include it in the command you type.</p>
+If you see a version number, as show above, then Git is installed successfully. If you see a message along the lines of <code>command not found</code>, then Git isn't correctly installed yet.</li>
+<li><p>When Git is tracking changes to our files, it needs to know who made those changes---we'll see why this is important when we explore Git's collaborative features in Part 4.</p>
+<p>To identify yourself, and therefore the changes you track with Git, you need to set Git's <code>user.name</code> and <code>user.email</code> settings with the following commands, replacing my name and email address with your own:</p>
+<pre><code>$ git config --global user.name &quot;George Brocklehurst&quot;
+$ git config --global user.email george@georgebrock.com</code></pre>
+<p>The <code>--global</code> argument tells Git that these settings should apply to all of the Git projects you work on, so you'll only need to set this once. Don't worry if you don't completely follow this now; we'll talk about the <code>git config</code> command in more detail later in the book.</p></li>
+</ol>
+</section>
+</section>
+<section id="goal-track-changes" class="level1">
+<h1>Goal: Track changes</h1>
+<p>If you can see how the incremental changes to your files led to their current state, then you have a better chance of understanding the project you are working on, fixing problems that arise, and collaborating successfully with others. In order to unlock the riches promised by a comprehensive history, we have to first build that history, one change at a time.</p>
+<p>By now, you should have installed Git on your system, and so you are ready to create your first Git repository.</p>
+<p>A <dfn>repository</dfn> is the place where Git keeps track of all of the changes for a given project. We need to create a repository for each project we want to track with Git.</p>
+<section id="the-git-init-command" class="level2">
+<h2>The <code>git init</code> command</h2>
+<p>The <code>git init</code> command creates a new Git repository to keep track of changes to the files in the directory where the command is run. For example:</p>
+<pre><code>$ cd projects/git-book
+$ git init
+Initialized empty Git repository in /home/george/projects/git-book/.git/</code></pre>
+<p>This creates a new Git repository in the <code>projects/git-book</code> directory, telling Git that from now on we want to track the changes made to one or more of the files in that directory. Since we haven't told Git exactly which files to track yet, the repository is empty; this is true even if the <code>projects/git-book</code> directory isn't empty.</p>
+<p>Running the command creates a new directory, <code>projects/git-book/.git</code>, where Git will store the files that represent the repository. This is the <dfn>Git directory</dfn>, whereas <code>projects/git-book</code> is the <dfn>working directory</dfn>.</p>
+<p>To begin with, we'll modify files in the working directory, just as we would if we weren't using Git, and then tell Git to track the changes we've made in the repository. As we get more advanced, we'll be able to conjure old or alternative versions of our project from the repository, summoning them to the working directory to do our bidding.</p>
+</section>
+<section id="the-git-add-and-git-commit-commands" class="level2">
+<h2>The <code>git add</code> and <code>git commit</code> commands</h2>
+<p>The individual changes that make up the history of our project are called <dfn>commits</dfn>. We commit changes to the Git repository in the same way we might commit something to memory; once it's committed we won't lose it.</p>
+<p>Each commit consists of a set of changes---like adding a new file, changing the contents of a file, deleting a file, or changing the properties of the file in some way---and a <dfn>commit message</dfn> that describes the changes, and the name and email address of the commit's author.</p>
+<p>Git provides a staging area called the <dfn>index</dfn>, where we build up a set of changes before committing them to the repository. We'll come back to why the index is useful later, but for now it's enough to know that creating a commit is a three stage process:</p>
+<ol type="1">
+<li>Change files in the working directory.</li>
+<li>Add some or all of those changes to the index.</li>
+<li>Create a commit from the changes staged in the index.</li>
+</ol>
+<p>Let's say we've created a file in our <code>git-book</code> working directory called <code>chapter1.txt</code>, and we're happy with the contents of the file and want to commit it to the repository. That's step one, step two is to add the file to the index using the <code>git add</code> command:</p>
+<pre><code>$ git add chapter1.txt</code></pre>
+<p>And then we can create a commit using the <code>git commit</code> command:</p>
+<pre><code>$ git commit --message &quot;Add first draft of chapter one&quot;
+[master (root-commit) adf6af9] Add first draft of chapter one
+ 1 file changed, 1 insertion(+)
+ create mode 100644 chapter1.txt</code></pre>
+<p>The commit message, passed using the <code>--message</code> argument, describes the changes in the commit: in this case, it adds the first draft of chapter one.</p>
+<p>By committing, we've drawn a line in the sand. Whatever changes we make to chapter one in future, we'll always be able to get back to this <dfn>revision</dfn> of the file. Even though a commit only contains the changes made to a file since it was last committed, we can think of a commit as representing a particular revision of our project, since Git is able to use all of the commits up to that point to reconstruct the revision of the project that existed when that commit was made.</p>
+<p>Now that we've included it in a commit, the file <code>chapter1.txt</code> will be <dfn>tracked</dfn> by Git: if we make any changes to the file in future, Git will notice that it has changed and needs to be committed again.</p>
+</section>
+<section id="summary" class="level2">
+<h2>Summary</h2>
+<ul>
+<li>Create a new Git repository with <code>git init</code></li>
+<li>Stage related changes in the index with <code>git add</code></li>
+<li>Commit the changes in the index with <code>git commit</code></li>
+</ul>
+</section>
+</section>
+<section id="goal-understand-what-is-being-tracked" class="level1">
+<h1>Goal: Understand what is being tracked</h1>
+<p>So far, we've made simple commits with just one file, but in a complex project there could be dozens or even hundreds of files. How do we know if they've been changed since they were last committed, or if they're even tracked by Git?</p>
+<p>In the last chapter we defined three important locations:</p>
+<ol type="1">
+<li>The working directory, where we keep and work on the current version of our project's files.</li>
+<li>The index, where we build up a set of changes ready to commit.</li>
+<li>The repository, where Git stores the history of our project as a series of commits.</li>
+</ol>
+<p>Git provides a number of commands for comparing the state of the repository, the index, and the working directory, so we can stay up to date with what's changed.</p>
+<section id="the-git-status-command" class="level2">
+<h2>The <code>git status</code> command</h2>
+<p>The <code>git status</code> command will tell us the status of our files. It lists all of the changed or untracked files in the working directory, split into the following groups:</p>
+<ol type="1">
+<li><strong>Changes to be committed</strong>: files which have already been added to the index with <code>git add</code> and will be included the next time we run <code>git    commit</code>.</li>
+<li><strong>Changes not staged for commit</strong>: files which have been changed in the working directory, but not added to the index.</li>
+<li><strong>Untracked files</strong>: files which have never been committed and therefore aren't tracked by Git.</li>
+</ol>
+<p>For example:</p>
+<pre><code>$ git status
+HEAD detached from eec7d91
+Changes to be committed:
+  (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+
+    new file:   chapter2.txt
+
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+    modified:   chapter1.txt
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+    chapter3.txt
+</code></pre>
+<p>In this case, <code>chapter2.txt</code> has just been added to the index for the first time with <code>git add</code>, <code>chapter1.txt</code> is tracked by Git but has been modified since it was last committed, and <code>chapter3.txt</code> isn't tracked by Git yet.</p>
+<p><code>git status</code> won't mention any files that haven't been changed since they were last committed. If none of your files have changed, <code>git status</code> will let you know that you have clean working directory:</p>
+<pre><code>$ git status
+HEAD detached from eec7d91
+nothing to commit, working directory clean</code></pre>
+<p><code>git status</code> isn't concerned with the details of exactly what's changed in each file, just which files have been changed and therefore could be committed.</p>
+</section>
+<section id="the-git-diff-command" class="level2">
+<h2>The <code>git diff</code> command</h2>
+<p>Now we know which files in our working directory have changed, it would be good to see the details of those changes. The <code>git diff</code> command provides this.</p>
+<p>If you've used the Unix <code>diff</code> utility then the output of <code>git diff</code> might look familiar, but while <code>diff</code> shows the difference between files, <code>git diff</code> shows the difference between versions of the same file.</p>
+<p>Without any arguments, <code>git diff</code> shows all changes that haven't been committed or added to the index.</p>
+<p>For example, here's what <code>chapter1.txt</code> the list time it was committed:</p>
+<pre><code>CHAPTER ONE
+
+This is the first chapter, where it all begins.</code></pre>
+<p>Since that commit, we've modified <code>chapter1.txt</code> in the working directory to look like this:</p>
+<pre><code>CHAPTER 1
+
+This is the first chapter, where it all begins.</code></pre>
+<p>Running <code>git diff</code> shows us exactly what the differences are:</p>
+<pre><code>$ git diff
+diff --git a/chapter1.txt b/chapter1.txt
+index 1e41245..80a7940 100644
+--- a/chapter1.txt
++++ b/chapter1.txt
+@@ -1,3 +1,3 @@
+-CHAPTER ONE
++CHAPTER 1
+ 
+ This is the first chapter, where it all begins.</code></pre>
+<p>The first section gives some information about the change Git is showing: which versions are being compared, and on which lines of which files there are changes. Other than the file's name, this is more useful to machines than humans, and I usually don't read it carefully. More important are the changes themselves:</p>
+<pre><code>-CHAPTER ONE
++CHAPTER 1
+ 
+ This is the first chapter, where it all begins.</code></pre>
+<p>Lines beginning with a <code>-</code> indicate a line that has been removed, and lines beginning with a <code>+</code> indicate a line that has been added. In this case a line has been changed: the old version of the line was removed, and the new version was added.</p>
+<p>Lines beginning with a space---lines that lack both <code>+</code> and <code>-</code>---are unchanged, but are shown to give the context of the change.</p>
+<section id="the-git-diff---staged-command" class="level3">
+<h3>The <code>git diff --staged</code> command</h3>
+<p>Remember that without any arguments <code>git diff</code> shows us the changes that haven't been staged in the index yet. <code>git diff --staged</code> shows us the changes that <em>have</em> been staged, but haven't yet been committed. In other words, <code>git diff --staged</code> shows you the changes that would be included in the commit, if you were to run <code>git commit</code> right now.</p>
+<p>It can be useful to run <code>git diff --staged</code> before <code>git commit</code> as a final check that the right changes have been staged in the index.</p>
+</section>
+</section>
+<section id="summary-1" class="level2">
+<h2>Summary</h2>
+<ul>
+<li>Look at the state of the working directory with <code>git status</code></li>
+<li>Look at the changes since the latest commit with <code>git diff</code></li>
+<li>Look at the contents of the index with <code>git diff --staged</code></li>
+</ul>
+</section>
+</section>
+<section id="goal-make-beautiful-commits" class="level1">
+<h1>Goal: Make beautiful commits</h1>
+<p>A good commit should contain a set of related changes, with a description of why those changes were made. Much of the power of tracking history is lost if we bundle lots of unrelated changes together in the same commit, or don't take the time to describe them properly.</p>
+<p>So far we've been assuming that all of the changes to a file belong in the same commit. Real world work is rarely this neat and tidy, though. Perhaps we were half way through changing a document, and found ourselves fixing an un-related typing error; perhaps we forgot to commit a set of changes before moving on to the next idea; perhaps we just got distracted: whatever the cause, a real project's working directory can be a messy place.</p>
+<p>This is where the index really comes into its own: By updating the index before we commit, we can carefully select the changes that go into each commit; even going so far as to split unrelated changes to the same file over several commits.</p>
+<section id="the-git-add---patch-command" class="level2">
+<h2>The <code>git add --patch</code> command</h2>
+<p>In addition to the name of a file, the <code>git add</code> command can take some options to control exactly what is added to the index. Particularly useful is the <code>--patch</code> option, which shows you each change in turn and lets you decide if it should be added to the index or not.</p>
+<p>Let's look at an example: I've made two changes to the same file but they are unrelated, so I want to add them to the repository as two separate commits. <code>git diff</code> tells me I have the following changes:</p>
+<pre><code>$ git diff
+diff --git a/chapter1.txt b/chapter1.txt
+index 8f6f18e..d119536 100644
+--- a/chapter1.txt
++++ b/chapter1.txt
+@@ -1,3 +1,3 @@
+-The quick brown fxo jumped over the lazy dog.
++The quick brown fox jumped over the lazy dog.
+ 
+-The dog was not best pleased.
++The dog was not best pleased, and barked angrily.</code></pre>
+<p>On the first line, I've corrected a typing error by changing <code>fxo</code> to <code>fox</code>, and then on the third line I've added some additional material about the dog's reaction to the fox. <code>git add --patch</code> will allow us to go through each change in turn, and decide if we want to add it to the index.</p>
+<pre><code>$ git add --patch
+diff --git a/chapter1.txt b/chapter1.txt
+index 8f6f18e..d119536 100644
+--- a/chapter1.txt
++++ b/chapter1.txt
+@@ -1,3 +1,3 @@
+-The quick brown fxo jumped over the lazy dog.
++The quick brown fox jumped over the lazy dog.
+ 
+-The dog was not best pleased.
++The dog was not best pleased, and barked angrily.
+Stage this hunk [y,n,q,a,d,/,s,e,?]? 
+</code></pre>
+<p>Git will show the changes---using the familiar style of <code>git diff</code>---one at a time, and asks me what I want to do with each <dfn>hunk</dfn> with the question <code>Stage this hunk [y,n,q,a,d,/,s,e,?]?</code>. Most of the time we can answer with <code>y</code> to add the change to the index, or <code>n</code> to ignore it for now and move on to the next change. In this case, it's a little more complicated: since my changes are very close together, Git's assumed that they're probably related and shows them as a single hunk. I want to split up this hunk, and since I need something beyond a basic &quot;yes&quot; or &quot;no&quot; I can use <code>?</code> to explain the other options:</p>
+<pre><code>Stage this hunk [y,n,q,a,d,/,s,e,?]? ?
+y - stage this hunk
+n - do not stage this hunk
+q - quit; do not stage this hunk or any of the remaining ones
+a - stage this hunk and all later hunks in the file
+d - do not stage this hunk or any of the later hunks in the file
+g - select a hunk to go to
+/ - search for a hunk matching the given regex
+j - leave this hunk undecided, see next undecided hunk
+J - leave this hunk undecided, see next hunk
+k - leave this hunk undecided, see previous undecided hunk
+K - leave this hunk undecided, see previous hunk
+s - split the current hunk into smaller hunks
+e - manually edit the current hunk
+? - print help</code></pre>
+<p>After looking through my options, I see I can use <code>s</code> to tell Git that even though these changes are close to each other they should be split up so that I can treat them differently:</p>
+<pre><code>Stage this hunk [y,n,q,a,d,/,s,e,?]? s
+Split into 2 hunks.
+@@ -1,2 +1,2 @@
+-The quick brown fxo jumped over the lazy dog.
++The quick brown fox jumped over the lazy dog.
+ 
+Stage this hunk [y,n,q,a,d,/,j,J,g,e,?]? </code></pre>
+<p>Git splits the change into two hunks, and shows me the first of them. This change is just the correction on the first line, so I can stage it in the index using <code>y</code>. Once it's staged, Git will show me the next change. Since this change isn't related to the one I've already added to the index, I don't want to include it in the same commit, so I can skip it with <code>n</code>:</p>
+<pre><code>Stage this hunk [y,n,q,a,d,/,j,J,g,e,?]? y
+@@ -2,2 +2,2 @@
+ 
+-The dog was not best pleased.
++The dog was not best pleased, and barked angrily.
+Stage this hunk [y,n,q,a,d,/,K,g,e,?]? n</code></pre>
+<p>I've now made a decision about each of the changes to the tracked files in my working directory, so <code>git add --patch</code> exits, and I can commit the correction that's staged, and then stage and commit the additional content:</p>
+<pre><code>$ git commit --message &quot;Fix typing error&quot;
+[master a76fa02] Fix typing error
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+$ git diff
+diff --git a/chapter1.txt b/chapter1.txt
+index 9d07dc3..d119536 100644
+--- a/chapter1.txt
++++ b/chapter1.txt
+@@ -1,3 +1,3 @@
+ The quick brown fox jumped over the lazy dog.
+ 
+-The dog was not best pleased.
++The dog was not best pleased, and barked angrily.
+$ git add chapter1.txt
+$ git commit --message &quot;Add information about the dog's reaction&quot;
+[master 4013a6a] Add information about the dog's reaction
+ 1 file changed, 1 insertion(+), 1 deletion(-)</code></pre>
+<p>I almost always use the <code>--patch</code> option when I'm adding files to the index, even when I'm confident that all of the changes are related and will end up as a single commit: It gives me the opportunity to review my changes, and has saved me many times from committing something that wasn't quite right.</p>
+</section>
+<section id="summary-2" class="level2">
+<h2>Summary</h2>
+<ul>
+<li>Good commits are focused on a set of related changes</li>
+<li>Use <code>git commit --patch</code> to add specific changes to the index</li>
+</ul>
+</section>
+</section>
+</body>
+</html>

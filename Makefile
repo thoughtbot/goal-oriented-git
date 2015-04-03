@@ -19,6 +19,10 @@ submodules: .gitmodules
 	git submodule init
 	git submodule update
 
+release: build
+	rm -rf release
+	cp -R build/goal-oriented-git release
+
 clean:
 	rm -rf build
 	rm $(CHAPTERS)
