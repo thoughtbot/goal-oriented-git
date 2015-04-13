@@ -1,16 +1,14 @@
 SRCS=$(wildcard src/*.md)
 CHAPTERS=$(patsubst src/%,book/%,$(SRCS))
+PAPERBACK=docker run --volume $(PWD):/book thoughtbot/paperback
 
 .PHONY: clean stats submodules
 
-build: submodules $(CHAPTERS) .bundle
-	bin/stubs/paperback build
+build: submodules $(CHAPTERS)
+	$(PAPERBACK) build
 
-stats: submodules $(CHAPTERS) .bundle
-	bin/stubs/paperback stats
-
-.bundle: Gemfile
-	bundle --path .bundle --binstubs bin/stubs
+stats: submodules $(CHAPTERS)
+	$(PAPERBACK) stats
 
 book/%.md: src/%.md bin/scriptrunner lib/script_runner
 	bin/scriptrunner $< > $@
