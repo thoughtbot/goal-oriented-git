@@ -28,8 +28,8 @@ we want to create, and it will be created:
 
 Notice that when we ran `git branch` again, there is a `*` by the `master`
 branch. This indicates that the `master` branch is the current branch; if we
-make any new commits they will be part of the master branch, not the new
-`chapter-2` branch.
+make any new commits they will be part of the master branch, not the `chapter-2`
+branch.
 
 ## The `git checkout` command
 
@@ -53,7 +53,7 @@ tells us the current branch:
 ## Committing to branches
 
 We've created two branches, but so far they are identical. If we use the `git
-log` branch on our two branches we'll see the same set of commits:
+log` command on each of our two branches we'll see the same set of commits:
 
 `# cd examples/3-2-create-a-branch
 `$ git checkout master
@@ -66,26 +66,51 @@ book's editor on the `master` branch:
 
 `# cd examples/3-2-create-a-branch
 `$ git checkout master
-`# echo "An addition" >> chapter1.txt
+`# echo "It has been edited." >> chapter1.txt
+`$ git diff
 `$ git add chapter1.txt
 `$ git commit --message "Incorporate editor's feedback into chapter 1"
+
+Notice that the output from `git commit` includes the name of the current
+branch, in this case, `master`.
+
+We've added the phrase "It has been edited." to `chapter1.txt` and committed the
+change, but if we change to another branch it'll be as if that change never
+happened:
+
+`# cd examples/3-2-create-a-branch
+`$ git checkout chapter-2
+`$ cat chapter1.txt
+
+The change we made on `master` isn't there. If we look at the output of `git
+log`, the commit isn't there, either:
+
+`# cd examples/3-2-create-a-branch
+`$ git log --oneline
+
+Changes committed on the `master` branch aren't visible on our `chapter-2`
+branch, leaving us free to work on two different things in parallel, without
+worrying that they might get tangled up with each other.
 
 Next, let's commit the first draft of chapter two on the `chapter-2` branch:
 
 `# cd examples/3-2-create-a-branch
-`$ git checkout chapter-2
-`# echo "The second chapter" > chapter2.txt
+`# echo "# Chapter 2" > chapter2.txt
+`# echo "This is the first draft of the second chapter." >> chapter2.txt
 `$ git add chapter2.txt
 `$ git commit --message "First draft of chapter 2"
 
-Now, when we run `git log` on each branch we see different commits:
+This new commit does show up when we run `git log`:
+
+`# cd examples/3-2-create-a-branch
+`$ git log --oneline
+
+When we switch back to the `master` branch, we don't see the chapter 2 commit,
+but we do see our edits to chapter 1:
 
 `# cd examples/3-2-create-a-branch
 `$ git checkout master
 `$ git log --oneline
-`$ git checkout chapter-2
-`$ git log --oneline
-`# git checkout master
 `# git reset --hard HEAD~1
 `# git branch -D chapter-2
 `# git clean -f
@@ -109,7 +134,7 @@ with `git checkout`:
 `# git branch -D chapter-3
 
 Instead, we can pass the `-b` argument to `git checkout`. This will first create
-the branch we've requested and then immediately check it out:
+the branch we've requested, and then immediately check it out:
 
 `# cd examples/3-2-create-a-branch
 `$ git checkout -b chapter-3

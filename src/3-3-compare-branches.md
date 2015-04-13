@@ -34,7 +34,7 @@ each branch individually:
 
 First of all, it would be great if we could get `git log` to show us *all* of
 the commits at once, without having to switch branches and compare the output of
-multiple logs. The conveniently named `--log` argument will make `git log` do
+multiple logs. The conveniently named `--all` argument will make `git log` do
 this for us:
 
 `# cd examples/3-3-compare-branches
@@ -42,13 +42,16 @@ this for us:
 
 ### The `--graph` argument
 
-We've got down to one command, but there's no structure: we can't tell which
+We can see all of the commits, but there's no structure: we can't tell which
 commit is part of which branch. Passing the `--graph` argument to `git log`
 fixes this; it causes Git to draw a visual representation of the branching
 structure in the left hand margin:
 
 `# cd examples/3-3-compare-branches
 `$ git log --oneline --all --graph
+
+We can see that after the commit `Fix typo in chapter 1`, the history branches
+off in two directions.
 
 ### The `--decorate` argument
 
@@ -66,6 +69,13 @@ project, usually the most recent commit. Now that we're switching between
 branches we can define `HEAD` a little more thoroughly: `HEAD` is the current
 revision of the project, usually the most recent commit on the current branch.
 
+Since we have the `chapter-2` branch checked out, `HEAD` is the most recent
+commit on that branch. If we switch to the `master` branch, the `HEAD` changes:
+
+`# cd examples/3-3-compare-branches
+`$ git checkout master
+`$ git log --oneline --all --graph --decorate
+
 ## The `git show-branch` command
 
 Using the log is useful for getting an overview, but Git also provides tools to
@@ -76,6 +86,7 @@ will show all of the commits on each of those branches, but only as far back as
 the point where they diverged:
 
 `# cd examples/3-3-compare-branches
+`# git checkout chapter-2
 `$ git show-branch master chapter-2
 
 The output of this command can be a little hard to interpret, so let's break it
