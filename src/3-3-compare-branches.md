@@ -24,7 +24,7 @@ the history diverged into a commit tracking work on a new chapter on the
 Using the `git log` arguments we've already learnt, we looked at the history of
 each branch individually:
 
-`# cd examples/3-3-compare-branches
+`# reset_example 3-3-compare-branches
 `$ git checkout master
 `$ git log --oneline
 `$ git checkout chapter-2
@@ -37,7 +37,6 @@ the commits at once, without having to switch branches and compare the output of
 multiple logs. The conveniently named `--all` argument will make `git log` do
 this for us:
 
-`# cd examples/3-3-compare-branches
 `$ git log --oneline --all
 
 ### The `--graph` argument
@@ -47,7 +46,6 @@ commit is part of which branch. Passing the `--graph` argument to `git log`
 fixes this; it causes Git to draw a visual representation of the branching
 structure in the left hand margin:
 
-`# cd examples/3-3-compare-branches
 `$ git log --oneline --all --graph
 
 We can see that after the commit `Fix typo in chapter 1`, the history branches
@@ -60,7 +58,6 @@ Which branch is which? If we pass the `--decorate` argument to `git log`, then
 Git will decorate the commit at the tip of each branch with the name of the
 branch:
 
-`# cd examples/3-3-compare-branches
 `$ git log --oneline --all --graph --decorate
 
 Notice that one commit is also decorated with the label `HEAD`. In the chapter
@@ -72,7 +69,6 @@ revision of the project, usually the most recent commit on the current branch.
 Since we have the `chapter-2` branch checked out, `HEAD` is the most recent
 commit on that branch. If we switch to the `master` branch, the `HEAD` changes:
 
-`# cd examples/3-3-compare-branches
 `$ git checkout master
 `$ git log --oneline --all --graph --decorate
 
@@ -85,8 +81,7 @@ The `git show-branch` command takes a list of branch names as arguments, and
 will show all of the commits on each of those branches, but only as far back as
 the point where they diverged:
 
-`# cd examples/3-3-compare-branches
-`# git checkout chapter-2
+`# git checkout chapter-2 2>&1
 `$ git show-branch master chapter-2
 
 The output of this command can be a little hard to interpret, so let's break it
@@ -97,25 +92,21 @@ on each. The staggered symbols on the left are column headings: in the list of
 commits below we can tell which branches they belong to by looking at which of
 the first two columns contain a symbol.
 
-`# cd examples/3-3-compare-branches
 `! git show-branch master chapter-2 | head -n 3
 
 This is followed by a list of commits. This commit is only on the `chapter-2`
 branch, indicated by the `*` symbol in the second column:
 
-`# cd examples/3-3-compare-branches
 `! git show-branch master chapter-2 | tail -n 3 | grep -E '^ \*'
 
 This commit is only on `master`, indicated by a `+` symbol in the first column:
 
-`# cd examples/3-3-compare-branches
 `! git show-branch master chapter-2 | tail -n 3 | grep -E '^\+ '
 
 And finally this commit---the common ancestor of both branches, the point where
 they diverged---is present on both branches, indicated by `+*` in the first two
 columns:
 
-`# cd examples/3-3-compare-branches
 `! git show-branch master chapter-2 | tail -n 1
 
 ## Summary

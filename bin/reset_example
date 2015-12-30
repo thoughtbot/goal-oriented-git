@@ -6,5 +6,10 @@ rm -rf * .git
 
 if [ ! -z "$1" ]; then
   git clone "git@github.com:goal-oriented-git-examples/${1}.git" . 2>&1
+  git branch -r | grep -v HEAD
+  for b in $(git branch --remotes | grep -v HEAD); do
+    git checkout --track "$b" 2>&1
+  done
+  git checkout master 2>&1
   git remote rm origin
 fi

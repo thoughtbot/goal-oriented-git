@@ -34,7 +34,7 @@ Let's look at a situation we've seen before, with a `master` branch and a
 `chapter-2` feature branch. Notice we're using the `git graph` alias we defined
 in the previous chapter:
 
-`# cd examples/3-3-compare-branches
+`# reset_example 3-3-compare-branches
 `$ git graph
 
 Our draft of chapter 2 is complete, so how do we incorporate it back into the
@@ -49,20 +49,15 @@ In this case, we want to incorporate the changes from `chapter-2` into `master`.
 The first step in merging is to make sure we've checked out the `master` branch,
 since that's the branch we want to add to:
 
-`# cd examples/3-3-compare-branches
 `$ git checkout master
 
 Next, we use the `git merge` command with the name of the branch we're merging:
 
-`# cd examples/3-3-compare-branches
 `$ git merge chapter-2
 
 Compare the resulting graph to the original graph above:
 
-`# cd examples/3-3-compare-branches
 `$ git graph
-`# git reset --hard origin/master
-`# git checkout chapter-2
 
 A new commit has been created on the `master` branch, called a <dfn>merge
 commit</dfn>, which has two parent commits. The `chapter-2` branch is still
