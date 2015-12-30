@@ -33,8 +33,7 @@ module ScriptRunner
     end
 
     def sanitized_output
-      examples_root = File.expand_path("../../../examples", __FILE__)
-      example_path_matcher = %r(#{examples_root}/[^/]+)
+      example_path_matcher = %r(#{scratch_path})
       generated_output.map do |line|
         line.gsub(example_path_matcher, "/home/george")
       end
@@ -49,7 +48,9 @@ module ScriptRunner
       @script_file ||= Tempfile.new('script').tap do |file|
         file.puts %Q{#!/bin/sh\n}
         file.puts %Q{PATH="$PATH:#{bin_path}"}
-        file.puts %Q{HOME="#{home_path}"}
+        file.puts %Q{HOME="#{examples_root}"}
+        file.puts %Q{mkdir -p "#{scratch_path}"}
+        file.puts %Q{cd "#{scratch_path}"}
         file << script
         file.close
         File.chmod(0744, file.path)
@@ -84,7 +85,11 @@ module ScriptRunner
       File.expand_path('../../../bin', __FILE__)
     end
 
-    def home_path
+    def scratch_path
+      File.join(examples_root, 'scratch')
+    end
+
+    def examples_root
       File.expand_path('../../../examples', __FILE__)
     end
 

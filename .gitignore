@@ -2,3 +2,4 @@
 /book/*.md
 /.bundle/
 /bin/stubs/
+/examples/*/

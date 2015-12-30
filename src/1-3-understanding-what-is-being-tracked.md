@@ -31,8 +31,7 @@ following groups:
 
 For example:
 
-`# cd examples/1-3-understanding-what-is-being-tracked
-`# git reset --hard HEAD
+`# reset_example 1-3-understanding-what-is-being-tracked
 `# echo 'CHAPTER 2' > chapter2.txt
 `# git add chapter2.txt
 `# echo 'CHAPTER 3' > chapter3.txt
@@ -47,9 +46,7 @@ was last committed, and `chapter3.txt` isn't tracked by Git yet.
 last committed. If none of your files have changed, `git status` will let you
 know that you have clean working directory:
 
-`# cd examples/1-3-understanding-what-is-being-tracked
-`# git reset --hard HEAD
-`# git clean --force
+`# reset_example 1-3-understanding-what-is-being-tracked
 `$ git status
 
  `git status` isn't concerned with the details of exactly what's
@@ -70,8 +67,7 @@ or added to the index.
 
 For example, here's what `chapter1.txt` the last time it was committed:
 
-`# cd examples/1-3-understanding-what-is-being-tracked
-`# git reset --hard HEAD
+`# reset_example 1-3-understanding-what-is-being-tracked
 `# echo 'CHAPTER 2' > chapter2.txt
 `# git add chapter2.txt
 `# echo 'CHAPTER 3' > chapter3.txt
@@ -81,12 +77,10 @@ For example, here's what `chapter1.txt` the last time it was committed:
 Since that commit, we've modified `chapter1.txt` in the working directory to
 look like this:
 
-`# cd examples/1-3-understanding-what-is-being-tracked
 `! cat chapter1.txt
 
 Running `git diff` shows us exactly what the differences are:
 
-`# cd examples/1-3-understanding-what-is-being-tracked
 `$ git diff
 
 The first section gives some information about the change Git is showing: which
@@ -95,10 +89,7 @@ changes. Other than the file's name, this is more useful to machines than
 humans, and I usually don't read it carefully. More important are the changes
 themselves:
 
-`# cd examples/1-3-understanding-what-is-being-tracked
 `! git diff | sed -e '1,/@@/d'
-`# git clean -f
-`# git reset --hard HEAD
 
 Lines beginning with a `-` indicate a line that has been removed, and lines
 beginning with a `+` indicate a line that has been added. In this case a line

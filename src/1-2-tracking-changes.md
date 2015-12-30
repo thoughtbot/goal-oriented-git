@@ -18,8 +18,9 @@ track with Git.
 The `git init` command creates a new Git repository to keep track of changes to
 the files in the directory where the command is run. For example:
 
-`# cd examples/1-2-tracking-changes
-`# rm -rf projects/git-book/.git
+`# reset_example
+`# mkdir -p projects/git-book
+`# echo "First chapter" > projects/git-book/chapter1.txt
 `$ cd projects/git-book
 `$ git init
 
@@ -65,12 +66,12 @@ Let's say we've created a file in our `git-book` working directory called
 it to the repository. That's step one, step two is to add the file to the index
 using the `git add` command:
 
-`# cd examples/1-2-tracking-changes/projects/git-book
+`# cd projects/git-book
 `$ git add chapter1.txt
 
 And then we can create a commit using the `git commit` command:
 
-`# cd examples/1-2-tracking-changes/projects/git-book
+`# cd projects/git-book
 `$ git commit --message "Add first draft of chapter one"
 
 The commit message, passed using the `--message` argument, describes the changes

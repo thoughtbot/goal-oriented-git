@@ -13,7 +13,7 @@ it is tracking and the commits we've made in the past.
 
 Let's pretend I'm writing a novel, which has the following Git history:
 
-`# cd examples/2-4-searching-the-repository
+`# reset_example 2-4-searching-the-repository
 `$ git log --oneline
 
 I deleted a section of the novel, but I'm having second thoughts: I think the
@@ -26,14 +26,12 @@ the commit log to only show commits which contain changes that add or remove the
 word "Alice", I can narrow down my search.  We do this using `git log`'s `-S`
 option:
 
-`# cd examples/2-4-searching-the-repository
 `$ git log --oneline -S Alice
 
 Now I've narrowed down the search to three commits, and only one of the
 messages mentions removing content, so it looks like I've found my deleted
 scene.
 
-`# cd examples/2-4-searching-the-repository
 `$ git show 3ba3f98
 
 The `-S` option can be combined with the other filtering techniques we've seen,
@@ -56,7 +54,6 @@ you'll find that `git grep` works in much the same way.
 Let's say we want to find all references to Alice in all of the tracked files in
 the working directory. We can use `git grep`:
 
-`# cd examples/2-4-searching-the-repository
 `$ git grep Alice
 
 This tells me that Alice is currently only mentioned once, in the file
@@ -72,7 +69,6 @@ we can use `3ba3f98~1`.
 The `git grep` command can take a commit as a second argument, which tells it to
 search the particular revision of our project represented by that commit:
 
-`# cd examples/2-4-searching-the-repository
 `$ git grep Alice 3ba3f98~1
 
 I've found my answer: Alice used to be mentioned in `chapter1.txt` and

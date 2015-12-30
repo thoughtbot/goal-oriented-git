@@ -10,7 +10,7 @@ not very memorable. Fortunately, Git provides a range of alternatives.
 Let's imagine the following Git history, and see how we can refer to the commits
 without using the long-winded commit identifiers:
 
-`# cd examples/2-2-refer-to-commits
+`# reset_example 2-2-refer-to-commits
 `$ git log
 
 ## Abbreviating commit identifiers
@@ -18,7 +18,6 @@ without using the long-winded commit identifiers:
 Let's say we want to look at the latest commit. What we've seen so far is `git
 show` with the full identifier:
 
-`# cd examples/2-2-refer-to-commits
 `$ git show e420911b9d16d0fd75a12a71202673ae32fc933a
 
 In the previous chapter we saw that the `git log --oneline` command only prints
@@ -29,13 +28,11 @@ practice, this usually means that we can use the first 6 or 7 characters of the
 identifier without any problems, even in a long running project with thousands
 of commits.
 
-`# cd examples/2-2-refer-to-commits
 `$ git show e420911
 
 If you don't give enough characters to uniquely identify a single commit, Git
 will let you know that you've provided an ambiguous argument:
 
-`# cd examples/2-2-refer-to-commits
 `$ git show e42
 
 ## Relative commit references
@@ -44,14 +41,12 @@ Each commit in our Git repository has a <dfn>parent commit</dfn>: the
 commit that immediately preceded it. If we know the identifier of a commit, we
 can tell Git to give us its parent commit using a `~1` suffix. For example:
 
-`# cd examples/2-2-refer-to-commits
 `$ git show e420911~1
 
 By increasing the number after the `~` we can follow the parent relationships
 back through the project's history. For example, `~2` will give us the parent of
 the parent commit:
 
-`# cd examples/2-2-refer-to-commits
 `$ git show e420911~2
 
 ## Using the commit message
@@ -61,7 +56,6 @@ the identifier of one of its descendants, but identifiers aren't as memorable as
 commit messages. Fortunately it's possible to refer to commits using a part of
 their message, too:
 
-`# cd examples/2-2-refer-to-commits
 `$ git show :/Second
 
 If there are multiple commits that match the given word, then Git will pick the

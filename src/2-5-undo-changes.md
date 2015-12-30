@@ -16,22 +16,19 @@ commit, it will be removed in the new commit, and vice versa.
 
 Here is the commit we identified in the previous chapter:
 
-`# cd examples/2-4-searching-the-repository
+`# reset_example 2-4-searching-the-repository
 `$ git show 3ba3f98
 
 When we pass the commit's identifier as an argument to the `git revert` command,
 Git will construct the opposite set of changes, and commit them.
 
-`# cd examples/2-4-searching-the-repository
 `$ git revert 3ba3f98
 
 Notice that the output of the `git revert` command contains the identifier of
 the new commit.
 
-`# cd examples/2-4-searching-the-repository
 `# export HEAD=$(git rev-parse HEAD | colrm 8)
 `$ git show $HEAD
-`# git reset --hard origin/master
 
 Like the `git commit` command, `git revert` will open a text editor so that we
 can write a description of the commit, but unlike `git commit` it helpfully
@@ -68,7 +65,6 @@ Continuing with my novel, I've made some changes to `chapter1.txt` that I think
 are ready to commit, so I add them to the index, and `git status` shows that
 they are staged to commit:
 
-`# cd examples/2-4-searching-the-repository
 `# echo "They were friends." >> chapter1.txt
 `$ git add chapter1.txt
 `$ git status
@@ -77,15 +73,12 @@ I was about to commit, but I've changed my mind: these changes aren't all
 related, and it would probably be better to split them up over multiple commits.
 I can remove them from the index using `git reset`:
 
-`# cd examples/2-4-searching-the-repository
 `$ git reset
 
 `git status` confirms that `chapter1.txt` has still been changed, but is no
 longer staged to commit:
 
-`# cd examples/2-4-searching-the-repository
 `$ git status
-`# git reset --hard HEAD
 
 ### Remove commits from the repository
 
@@ -110,37 +103,32 @@ Let's see how this works with a real example: I want to undo the last two
 commits to my novel. First, to refresh our memory, let's look at what those
 commits contain:
 
-`# cd examples/2-4-searching-the-repository
+`# reset_example 2-4-searching-the-repository
 `$ git log --oneline
 
 Remember that `git log` shows the most recent commit first, so I'm trying to
 undo `e8393d4` and `2ba40c1`. The first of these commits adds some information
 about what Bob does at the cafe:
 
-`# cd examples/2-4-searching-the-repository
 `$ git show e8393d4
 
 The second commit removes all references to the cafe:
 
-`# cd examples/2-4-searching-the-repository
 `$ git show 2ba40c1
 
 In order to undo these commits, I need to reset the repository to the last
 revision before they were made: `1dba13c`.
 
-`# cd examples/2-4-searching-the-repository
 `$ git reset 1dba13c
 
 This doesn't change the working directory, but I have lost some information in
 the process. Let's look at the state of the repository after I reset:
 
-`# cd examples/2-4-searching-the-repository
 `$ git log --oneline
 
 The log looks good: the two commits we wanted to undo are gone. How about the
 working directory?
 
-`# cd examples/2-4-searching-the-repository
 `$ git status
 
 The status looks OK, too: there are some uncommitted changes in the working
@@ -148,9 +136,7 @@ directory, but the commits we just removed made changes to both `chapter1.txt`
 and `chapter2.txt`, and yet our working directory only has changes to
 `chapter1.txt`:
 
-`# cd examples/2-4-searching-the-repository
 `$ git diff
-`# git reset --hard origin/master
 
 The changes to `chapter2.txt` in our two deleted commits cancelled each other
 out: the first commit added a sentence about what Bob did at the cafe, and the

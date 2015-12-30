@@ -2,20 +2,16 @@ SRCS=$(wildcard src/*.md)
 CHAPTERS=$(patsubst src/%,book/%,$(SRCS))
 PAPERBACK=docker run --volume $(PWD):/book thoughtbot/paperback
 
-.PHONY: clean stats submodules
+.PHONY: clean stats
 
-build: submodules $(CHAPTERS)
+build: $(CHAPTERS)
 	$(PAPERBACK) build
 
-stats: submodules $(CHAPTERS)
+stats: $(CHAPTERS)
 	$(PAPERBACK) stats
 
 book/%.md: src/%.md bin/scriptrunner lib/script_runner
 	bin/scriptrunner $< > $@
-
-submodules: .gitmodules
-	git submodule init
-	git submodule update
 
 release: build
 	rm -rf release
@@ -24,4 +20,3 @@ release: build
 clean:
 	rm -rf build
 	rm $(CHAPTERS)
-	git submodule deinit -f .

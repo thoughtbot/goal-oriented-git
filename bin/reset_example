@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Reset the example scratch directory, ready for a new example
+
+rm -rf * .git
+
+if [ ! -z "$1" ]; then
+  git clone "git@github.com:goal-oriented-git-examples/${1}.git" . 2>&1
+  git remote rm origin
+fi

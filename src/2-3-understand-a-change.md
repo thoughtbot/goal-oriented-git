@@ -13,8 +13,8 @@ it changed?"
 Here's a confusing file called `chapter1.txt`. Let's dig into the history and
 see if we can work out what's going on:
 
-`# cd examples/2-3-understand-a-change
-`! git show aaad9ad:chapter1.txt
+`# reset_example 2-3-understand-a-change
+`! cat chapter1.txt
 
 It looks like there should be a list here, but there's only one item, and
 confusingly it seems like it should be the last item. Maybe this just needs to
@@ -26,8 +26,6 @@ The first command we can use to understand this file is `git blame`, which will
 tell us which person, and more importantly which commit, is to blame for the
 current state of each line in the file:
 
-`# cd examples/2-3-understand-a-change
-`# git checkout aaad9ad
 `$ git blame chapter1.txt
 
 Each line of the file is printed with some annotations: the abbreviated
@@ -38,7 +36,6 @@ In this case, both of those lines were last changed in the commit `61966bf`. The
 next step in our investigation should probably be to look at that commit and see
 the full change:
 
-`# cd examples/2-3-understand-a-change
 `$ git show 61966bf
 
 This is a clue on the road to solving this mystery: we now know that the
@@ -68,13 +65,11 @@ most recent commit. In our case, we want to see everything after commit
 
 Putting this together with the file path `chapter1.txt`, we get this command:
 
-`# cd examples/2-3-understand-a-change
 `$ git log 61966bf.. chapter1.txt
 
 Our carefully filtered log tells us that only one commit touched the file we're
 interested in during the time we're interested in. Let's take a closer look:
 
-`# cd examples/2-3-understand-a-change
 `$ git show aaad9ad
 
 Finally we have the full context of this confusing file. It started out as a

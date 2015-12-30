@@ -28,7 +28,7 @@ Let's look at an example: I've made two changes to the same file but they are
 unrelated, so I want to add them to the repository as two separate commits. `git
 diff` tells me I have the following changes:
 
-`# cd examples/1-4-beautiful-commits
+`# reset_example 1-4-beautiful-commits
 `# git reset 3acba2e
 `$ git diff
 
@@ -37,7 +37,6 @@ then on the third line I've added some additional material about the dog's
 reaction to the fox. `git add --patch` will allow us to go through each change
 in turn, and decide if we want to add it to the index.
 
-`# cd examples/1-4-beautiful-commits
 `! git-add-patch-demo q
 
 Git will show the changes---using the familiar style of `git diff`---one at a
@@ -49,14 +48,12 @@ very close together, Git's assumed that they're probably related and shows them
 as a single hunk. I want to split up this hunk, and since I need something
 beyond a basic "yes" or "no" I can use `?` to explain the other options:
 
-`# cd examples/1-4-beautiful-commits
 `! git-add-patch-demo ? q | sed -n '/Stage/,/@@/p' | sed '/@@/,$d'
 
 After looking through my options, I see I can use `s` to tell Git that even
 though these changes are close to each other they should be split up so that I
 can treat them differently:
 
-`# cd examples/1-4-beautiful-commits
 `! git-add-patch-demo s q | sed -n '/Stage/,/Stage/p'
 
 Git splits the change into two hunks, and shows me the first of them.
@@ -65,19 +62,16 @@ index using `y`. Once it's staged, Git will show me the next change.
 Since this change isn't related to the one I've already added to the index, I
 don't want to include it in the same commit, so I can skip it with `n`:
 
-`# cd examples/1-4-beautiful-commits
 `! git-add-patch-demo s y n | sed -n '/ y$/,/ n$/p'
 
 I've now made a decision about each of the changes to the tracked files in my
 working directory, so `git add --patch` exits, and I can commit the correction
 that's staged, and then stage and commit the additional content:
 
-`# cd examples/1-4-beautiful-commits
 `$ git commit --message "Fix typing error"
 `$ git diff
 `$ git add chapter1.txt
 `$ git commit --message "Add information about the dog's reaction"
-`# git reset --hard original
 
 I almost always use the `--patch` option when I'm adding files to the index,
 even when I'm confident that all of the changes are related and will end up as a
