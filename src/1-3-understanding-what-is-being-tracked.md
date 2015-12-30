@@ -68,7 +68,7 @@ files, `git diff` shows the difference between versions of the same file.
 Without any arguments, `git diff` shows all changes that haven't been committed
 or added to the index.
 
-For example, here's what `chapter1.txt` the list time it was committed:
+For example, here's what `chapter1.txt` the last time it was committed:
 
 `# cd examples/1-3-understanding-what-is-being-tracked
 `# git reset --hard HEAD
