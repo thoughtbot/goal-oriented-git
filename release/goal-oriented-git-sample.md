@@ -177,7 +177,7 @@ And then we can create a commit using the `git commit` command:
 
 ```
 $ git commit --message "Add first draft of chapter one"
-[master (root-commit) adf6af9] Add first draft of chapter one
+[master (root-commit) 6f9ec1c] Add first draft of chapter one
  1 file changed, 1 insertion(+)
  create mode 100644 chapter1.txt
 ```
@@ -238,7 +238,7 @@ For example:
 
 ```
 $ git status
-HEAD detached from eec7d91
+On branch master
 Changes to be committed:
   (use "git reset HEAD <file>..." to unstage)
 
@@ -267,7 +267,7 @@ know that you have clean working directory:
 
 ```
 $ git status
-HEAD detached from eec7d91
+On branch master
 nothing to commit, working directory clean
 ```
 
@@ -287,12 +287,12 @@ files, `git diff` shows the difference between versions of the same file.
 Without any arguments, `git diff` shows all changes that haven't been committed
 or added to the index.
 
-For example, here's what `chapter1.txt` the list time it was committed:
+For example, here's what `chapter1.txt` the last time it was committed:
 
 ```
 CHAPTER ONE
 
-This is the first chapter, where it all begins.
+This is the first chapter, where it all beings.
 ```
 
 Since that commit, we've modified `chapter1.txt` in the working directory to
@@ -301,7 +301,7 @@ look like this:
 ```
 CHAPTER 1
 
-This is the first chapter, where it all begins.
+This is the first chapter, where it all beings.
 ```
 
 Running `git diff` shows us exactly what the differences are:
@@ -309,14 +309,14 @@ Running `git diff` shows us exactly what the differences are:
 ```
 $ git diff
 diff --git a/chapter1.txt b/chapter1.txt
-index 1e41245..80a7940 100644
+index 30c9d02..074d0db 100644
 --- a/chapter1.txt
 +++ b/chapter1.txt
 @@ -1,3 +1,3 @@
 -CHAPTER ONE
 +CHAPTER 1
  
- This is the first chapter, where it all begins.
+ This is the first chapter, where it all beings.
 ```
 
 The first section gives some information about the change Git is showing: which
@@ -329,7 +329,7 @@ themselves:
 -CHAPTER ONE
 +CHAPTER 1
  
- This is the first chapter, where it all begins.
+ This is the first chapter, where it all beings.
 ```
 
 Lines beginning with a `-` indicate a line that has been removed, and lines
@@ -484,7 +484,7 @@ that's staged, and then stage and commit the additional content:
 
 ```
 $ git commit --message "Fix typing error"
-[master a76fa02] Fix typing error
+[master ee02d29] Fix typing error
  1 file changed, 1 insertion(+), 1 deletion(-)
 $ git diff
 diff --git a/chapter1.txt b/chapter1.txt
@@ -498,7 +498,7 @@ index 9d07dc3..d119536 100644
 +The dog was not best pleased, and barked angrily.
 $ git add chapter1.txt
 $ git commit --message "Add information about the dog's reaction"
-[master 4013a6a] Add information about the dog's reaction
+[master 1caf774] Add information about the dog's reaction
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 
