@@ -1,3 +1,0 @@
-# Goal: Combine branches
-
-STUB

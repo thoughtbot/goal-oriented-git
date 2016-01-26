@@ -39,11 +39,13 @@
 
 <<[3-3-compare-branches.md]
 
-<<[3-4-combine-branches.md]
+<<[3-4-creating-aliases.md]
 
-<<[3-5-move-branches.md]
+<<[3-5-combine-branches.md]
 
-<<[3-6-delete-branches.md]
+<<[3-6-move-branches.md]
+
+<<[3-7-delete-branches.md]
 
 \part{Collaboration}
 
